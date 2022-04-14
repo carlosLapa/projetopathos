@@ -1,0 +1,2 @@
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao) VALUES ('Aveiro', 'Prédio', 'Edificio do Sol', 'Habitação', 'Moderna', 3, '2A');
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao) VALUES ('Coimbra', 'Prédio', 'Edificio da Lua', 'Habitação', 'Moderna', 5, '5F');
