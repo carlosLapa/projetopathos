@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ferreiralapa.projetopathos.entities.Edificio;
+import com.ferreiralapa.projetopathos.dto.EdificioDTO;
 import com.ferreiralapa.projetopathos.services.EdificioService;
 
 @RestController
@@ -19,8 +19,8 @@ public class EdificioResource {
 	private EdificioService edificioService;
 
 	@GetMapping
-	public ResponseEntity<List<Edificio>> findAll() {
-		List<Edificio> list = edificioService.findAll();
+	public ResponseEntity<List<EdificioDTO>> findAll() {
+		List<EdificioDTO> list = edificioService.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
