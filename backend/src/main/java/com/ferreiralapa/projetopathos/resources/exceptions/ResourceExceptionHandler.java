@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.ferreiralapa.projetopathos.services.exceptions.EntityNotFoundException;
 
-// Esta annotation permite interceptar alguma excepção q ocorra no Resource/controller
+// Esta annotation permite interceptar alguma excepção q ocorra no Resource(controller)
 @ControllerAdvice
 public class ResourceExceptionHandler {
 

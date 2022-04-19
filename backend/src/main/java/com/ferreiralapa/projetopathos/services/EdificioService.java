@@ -32,4 +32,18 @@ public class EdificioService {
 		return new EdificioDTO(entity);
 	}
 
+	@Transactional
+	public EdificioDTO insert(EdificioDTO dto) {
+		Edificio entity = new Edificio();
+		entity.setLocalizacao(dto.getLocalizacao());
+		entity.setTipologia(dto.getTipologia());
+		entity.setNome(dto.getNome());
+		entity.setUtilizacao(dto.getUtilizacao());
+		entity.setArquitetura(dto.getArquitetura());
+		entity.setPiso(dto.getPiso());
+		entity.setFracao(dto.getFracao());
+		entity = edificioRepository.save(entity);
+		return new EdificioDTO(entity);
+	}
+
 }
