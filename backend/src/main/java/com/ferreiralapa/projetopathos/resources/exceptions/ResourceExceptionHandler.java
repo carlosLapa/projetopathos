@@ -9,14 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.ferreiralapa.projetopathos.services.exceptions.EntityNotFoundException;
+import com.ferreiralapa.projetopathos.services.exceptions.ResourceNotFoundException;
 
 // Esta annotation permite interceptar alguma excepção q ocorra no Resource(controller)
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity<StandardError> edificioNotFound(EntityNotFoundException e, HttpServletRequest request) {
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<StandardError> edificioNotFound(ResourceNotFoundException e, HttpServletRequest request) {
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(HttpStatus.NOT_FOUND.value());
