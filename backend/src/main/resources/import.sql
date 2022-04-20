@@ -1,2 +1,12 @@
 INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Aveiro', 'Prédio', 'Edificio do Sol', 'Habitação', 'Moderna', 3, '2A', NOW());
 INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Coimbra', 'Prédio', 'Edificio da Lua', 'Habitação', 'Moderna', 5, '5F', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Porto', 'Prédio', 'Edificio da Água', 'Habitação', 'Moderna', 5, '1B', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Lisboa', 'Prédio', 'Edificio da Terra', 'Habitação', 'Moderna', 5, '7F', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Aveiro', 'Prédio', 'Edificio do Metal', 'Habitação', 'Moderna', 5, '5A', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Porto', 'Prédio', 'Edificio da Floresta', 'Habitação', 'Moderna', 5, '5B', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Beja', 'Prédio', 'Edificio da Montanha', 'Habitação', 'Moderna', 5, '6C', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Viseu', 'Prédio', 'Edificio da Cidade', 'Habitação', 'Moderna', 5, '5C', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Coimbra', 'Prédio', 'Edificio do Mar', 'Habitação', 'Moderna', 5, '1A', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Aveiro', 'Prédio', 'Edificio da Areia', 'Habitação', 'Moderna', 5, '1B', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Aveiro', 'Prédio', 'Edificio do Fogo', 'Habitação', 'Moderna', 5, '3F', NOW());
+INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, created_At) VALUES ('Lisboa', 'Prédio', 'Edificio do Gelo', 'Habitação', 'Moderna', 5, '4E', NOW());
