@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ferreiralapa.projetopathos.dto.EdificioDTO;
 import com.ferreiralapa.projetopathos.entities.Edificio;
 import com.ferreiralapa.projetopathos.repositories.EdificioRepository;
+import com.ferreiralapa.projetopathos.services.exceptions.DatabaseException;
 import com.ferreiralapa.projetopathos.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -63,6 +66,17 @@ public class EdificioService {
 			return new EdificioDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("id não encontrado! " + id + "");
+		}
+
+	}
+
+	public void delete(Long id) {
+		try {
+			edificioRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("id não encontrado! " + id + "");
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException("Violação de integridade!");
 		}
 
 	}
