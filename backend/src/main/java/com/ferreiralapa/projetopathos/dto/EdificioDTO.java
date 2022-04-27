@@ -1,6 +1,7 @@
 package com.ferreiralapa.projetopathos.dto;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import com.ferreiralapa.projetopathos.entities.Edificio;
 
@@ -15,12 +16,14 @@ public class EdificioDTO implements Serializable {
 	private String arquitetura;
 	private Integer piso;
 	private String fracao;
+	private String imgUrl;
+	private Instant date;
 
 	public EdificioDTO() {
 	}
 
 	public EdificioDTO(Long id, String localizacao, String tipologia, String nome, String utilizacao,
-			String arquitetura, Integer piso, String fracao) {
+			String arquitetura, Integer piso, String fracao, String imgUrl, Instant date) {
 		this.id = id;
 		this.localizacao = localizacao;
 		this.tipologia = tipologia;
@@ -29,6 +32,8 @@ public class EdificioDTO implements Serializable {
 		this.arquitetura = arquitetura;
 		this.piso = piso;
 		this.fracao = fracao;
+		this.imgUrl = imgUrl;
+		this.date = date;
 	}
 
 	public EdificioDTO(Edificio entity) {
@@ -40,6 +45,8 @@ public class EdificioDTO implements Serializable {
 		this.arquitetura = entity.getArquitetura();
 		this.piso = entity.getPiso();
 		this.fracao = entity.getFracao();
+		this.imgUrl = entity.getImgUrl();
+		this.date = entity.getDate();
 	}
 
 	public Long getId() {
@@ -104,6 +111,22 @@ public class EdificioDTO implements Serializable {
 
 	public void setFracao(String fracao) {
 		this.fracao = fracao;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public Instant getDate() {
+		return date;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
 	}
 
 }

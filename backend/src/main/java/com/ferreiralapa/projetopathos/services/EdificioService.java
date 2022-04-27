@@ -53,6 +53,8 @@ public class EdificioService {
 		entity.setArquitetura(dto.getArquitetura());
 		entity.setPiso(dto.getPiso());
 		entity.setFracao(dto.getFracao());
+		entity.setImgUrl(dto.getImgUrl());
+		entity.setDate(dto.getDate());
 		entity = edificioRepository.save(entity);
 		return new EdificioDTO(entity);
 	}
@@ -68,6 +70,8 @@ public class EdificioService {
 			entity.setArquitetura(dto.getArquitetura());
 			entity.setPiso(dto.getPiso());
 			entity.setFracao(dto.getFracao());
+			entity.setImgUrl(dto.getImgUrl());
+			entity.setDate(dto.getDate());
 			entity = edificioRepository.save(entity);
 			return new EdificioDTO(entity);
 		} catch (EntityNotFoundException e) {

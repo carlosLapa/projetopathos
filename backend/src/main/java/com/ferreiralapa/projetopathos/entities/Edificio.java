@@ -28,6 +28,11 @@ public class Edificio implements Serializable {
 	private String arquitetura;
 	private Integer piso;
 	private String fracao;
+	private String imgUrl;
+
+	// Para armazenar a data em UTC
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant date;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
@@ -39,7 +44,7 @@ public class Edificio implements Serializable {
 	}
 
 	public Edificio(Long id, String localizacao, String tipologia, String nome, String utilizacao, String arquitetura,
-			Integer piso, String fracao) {
+			Integer piso, String fracao, String imgUrl, Instant date) {
 		super();
 		this.id = id;
 		this.localizacao = localizacao;
@@ -49,6 +54,8 @@ public class Edificio implements Serializable {
 		this.arquitetura = arquitetura;
 		this.piso = piso;
 		this.fracao = fracao;
+		this.imgUrl = imgUrl;
+		this.date = date;
 	}
 
 	public Long getId() {
@@ -115,12 +122,28 @@ public class Edificio implements Serializable {
 		this.localizacao = localizacao;
 	}
 
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
 	public Instant getUpdatedAt() {
 		return updatedAt;
+	}
+
+	public Instant getDate() {
+		return date;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
 	}
 
 	@PrePersist
