@@ -24,6 +24,7 @@ public class Anomalia implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	// Aqui talvez faça mais sentido ser um boolean - pois teve consequencia ou nao
 	private String consequente;
 	private String inconsequente;
 	

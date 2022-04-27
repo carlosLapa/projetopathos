@@ -2,8 +2,6 @@ package com.ferreiralapa.projetopathos.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.ferreiralapa.projetopathos.entities.Patologia;
 
@@ -16,8 +14,6 @@ public class PatologiaDTO implements Serializable {
 	private String descricao;
 	private String imgUrl;
 	private Instant date;
-
-	private List<EdificioDTO> edificios = new ArrayList<>();
 
 	public PatologiaDTO() {
 		super();
