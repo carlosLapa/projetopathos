@@ -55,6 +55,7 @@ public class EdificioService {
 		entity.setFracao(dto.getFracao());
 		entity.setImgUrl(dto.getImgUrl());
 		entity.setDate(dto.getDate());
+		entity.setCreatedAt(dto.getCreatedAt());
 		entity = edificioRepository.save(entity);
 		return new EdificioDTO(entity);
 	}

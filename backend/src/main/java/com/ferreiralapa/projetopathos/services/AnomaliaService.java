@@ -13,8 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ferreiralapa.projetopathos.dto.AnomaliaDTO;
+import com.ferreiralapa.projetopathos.dto.EdificioDTO;
 import com.ferreiralapa.projetopathos.entities.Anomalia;
+import com.ferreiralapa.projetopathos.entities.Edificio;
 import com.ferreiralapa.projetopathos.repositories.AnomaliaRepository;
+import com.ferreiralapa.projetopathos.repositories.EdificioRepository;
 import com.ferreiralapa.projetopathos.services.exceptions.DatabaseException;
 import com.ferreiralapa.projetopathos.services.exceptions.ResourceNotFoundException;
 
@@ -22,7 +25,10 @@ import com.ferreiralapa.projetopathos.services.exceptions.ResourceNotFoundExcept
 public class AnomaliaService {
 
 	@Autowired
-	private AnomaliaRepository AnomaliaRepository;
+	private AnomaliaRepository anomaliaRepository;
+
+	@Autowired
+	private EdificioRepository edificioRepository;
 
 	/*
 	 * @Transactional(readOnly = true) public List<AnomaliaDTO> findAll() {
@@ -32,13 +38,13 @@ public class AnomaliaService {
 
 	@Transactional(readOnly = true)
 	public Page<AnomaliaDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Anomalia> list = AnomaliaRepository.findAll(pageRequest);
+		Page<Anomalia> list = anomaliaRepository.findAll(pageRequest);
 		return list.map(x -> new AnomaliaDTO(x));
 	}
 
 	@Transactional(readOnly = true)
 	public AnomaliaDTO findById(Long id) {
-		Optional<Anomalia> obj = AnomaliaRepository.findById(id);
+		Optional<Anomalia> obj = anomaliaRepository.findById(id);
 		Anomalia entity = obj.orElseThrow(() -> new ResourceNotFoundException("Anomalia não encontrada!"));
 		return new AnomaliaDTO(entity, entity.getEdificios());
 	}
@@ -46,25 +52,17 @@ public class AnomaliaService {
 	@Transactional
 	public AnomaliaDTO insert(AnomaliaDTO dto) {
 		Anomalia entity = new Anomalia();
-		entity.setConsequente(dto.getConsequente());
-		entity.setInconsequente(dto.getInconsequente());
-		entity.setDescricao(dto.getDescricao());
-		entity.setDate(dto.getDate());
-		// ainda falta
-		entity = AnomaliaRepository.save(entity);
+		copyDtoToEntity(dto, entity);
+		entity = anomaliaRepository.save(entity);
 		return new AnomaliaDTO(entity);
 	}
 
 	@Transactional
 	public AnomaliaDTO update(Long id, AnomaliaDTO dto) {
 		try {
-			Anomalia entity = AnomaliaRepository.getById(id);
-			entity.setConsequente(dto.getConsequente());
-			entity.setInconsequente(dto.getInconsequente());
-			entity.setDescricao(dto.getDescricao());
-			entity.setDate(dto.getDate());
-			// ainda falta
-			entity = AnomaliaRepository.save(entity);
+			Anomalia entity = anomaliaRepository.getById(id);
+			copyDtoToEntity(dto, entity);
+			entity = anomaliaRepository.save(entity);
 			return new AnomaliaDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("id não encontrado! " + id + "");
@@ -74,11 +72,29 @@ public class AnomaliaService {
 
 	public void delete(Long id) {
 		try {
-			AnomaliaRepository.deleteById(id);
+			anomaliaRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("id não encontrado! " + id + "");
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Violação de integridade!");
+		}
+
+	}
+
+	private void copyDtoToEntity(AnomaliaDTO dto, Anomalia entity) {
+		entity.setConsequente(dto.getConsequente());
+		entity.setInconsequente(dto.getInconsequente());
+		entity.setDescricao(dto.getDescricao());
+		entity.setDate(dto.getDate());
+		/*
+		 * Para garantir que compiamos somente as edificios que vêm no dto, efetuamos um
+		 * clear, para limpar os edificios que podem estar na entidade Assim, associamos
+		 * edificio (entidades) dentro da entidade anomalia
+		 */
+		entity.getEdificios().clear();
+		for (EdificioDTO edificioDto : dto.getEdificios()) {
+			Edificio edificio = edificioRepository.getById(edificioDto.getId());
+			entity.getEdificios().add(edificio);
 		}
 
 	}

@@ -44,7 +44,7 @@ public class Edificio implements Serializable {
 	}
 
 	public Edificio(Long id, String localizacao, String tipologia, String nome, String utilizacao, String arquitetura,
-			Integer piso, String fracao, String imgUrl, Instant date) {
+			Integer piso, String fracao, String imgUrl, Instant date, Instant createdAt) {
 		super();
 		this.id = id;
 		this.localizacao = localizacao;
@@ -56,6 +56,7 @@ public class Edificio implements Serializable {
 		this.fracao = fracao;
 		this.imgUrl = imgUrl;
 		this.date = date;
+		this.createdAt = createdAt;
 	}
 
 	public Long getId() {
@@ -132,6 +133,14 @@ public class Edificio implements Serializable {
 
 	public Instant getCreatedAt() {
 		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public Instant getUpdatedAt() {

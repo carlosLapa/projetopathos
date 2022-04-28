@@ -18,12 +18,13 @@ public class EdificioDTO implements Serializable {
 	private String fracao;
 	private String imgUrl;
 	private Instant date;
+	private Instant createdAt;
 
 	public EdificioDTO() {
 	}
 
 	public EdificioDTO(Long id, String localizacao, String tipologia, String nome, String utilizacao,
-			String arquitetura, Integer piso, String fracao, String imgUrl, Instant date) {
+			String arquitetura, Integer piso, String fracao, String imgUrl, Instant date, Instant createdAt) {
 		this.id = id;
 		this.localizacao = localizacao;
 		this.tipologia = tipologia;
@@ -34,6 +35,7 @@ public class EdificioDTO implements Serializable {
 		this.fracao = fracao;
 		this.imgUrl = imgUrl;
 		this.date = date;
+		this.createdAt = createdAt;
 	}
 
 	public EdificioDTO(Edificio entity) {
@@ -47,6 +49,7 @@ public class EdificioDTO implements Serializable {
 		this.fracao = entity.getFracao();
 		this.imgUrl = entity.getImgUrl();
 		this.date = entity.getDate();
+		this.createdAt = entity.getCreatedAt();
 	}
 
 	public Long getId() {
@@ -127,6 +130,14 @@ public class EdificioDTO implements Serializable {
 
 	public void setDate(Instant date) {
 		this.date = date;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
 	}
 
 }
