@@ -2,13 +2,16 @@ package com.ferreiralapa.projetopathos.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -39,6 +42,10 @@ public class Edificio implements Serializable {
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
+
+	/* Para aceder às anomalias associadas a cada edificio */
+	@ManyToMany(mappedBy = "edificios")
+	private Set<Anomalia> anomalias = new HashSet<>();
 
 	public Edificio() {
 	}
@@ -163,6 +170,10 @@ public class Edificio implements Serializable {
 	@PreUpdate
 	public void preUpdate() {
 		updatedAt = Instant.now();
+	}
+
+	public Set<Anomalia> getAnomalias() {
+		return anomalias;
 	}
 
 	@Override

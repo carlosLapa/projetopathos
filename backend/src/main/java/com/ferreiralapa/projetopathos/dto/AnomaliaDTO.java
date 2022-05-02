@@ -47,7 +47,7 @@ public class AnomaliaDTO implements Serializable {
 	 */
 	public AnomaliaDTO(Anomalia entity, Set<Edificio> edificios) {
 		this(entity);
-		edificios.forEach(ed -> this.edificios.add(new EdificioDTO(ed)));
+		edificios.forEach(edif -> this.edificios.add(new EdificioDTO(edif)));
 	}
 
 	public Long getId() {

@@ -2,7 +2,11 @@ package com.ferreiralapa.projetopathos.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
+import com.ferreiralapa.projetopathos.entities.Anomalia;
 import com.ferreiralapa.projetopathos.entities.Edificio;
 
 public class EdificioDTO implements Serializable {
@@ -19,6 +23,8 @@ public class EdificioDTO implements Serializable {
 	private String imgUrl;
 	private Instant date;
 	private Instant createdAt;
+
+	private List<AnomaliaDTO> anomalias = new ArrayList<>();
 
 	public EdificioDTO() {
 	}
@@ -50,6 +56,11 @@ public class EdificioDTO implements Serializable {
 		this.imgUrl = entity.getImgUrl();
 		this.date = entity.getDate();
 		this.createdAt = entity.getCreatedAt();
+	}
+
+	public EdificioDTO(Edificio entity, Set<Anomalia> anomalias) {
+		this(entity);
+		anomalias.forEach(anom -> this.anomalias.add(new AnomaliaDTO(anom)));
 	}
 
 	public Long getId() {
@@ -138,6 +149,14 @@ public class EdificioDTO implements Serializable {
 
 	public void setCreatedAt(Instant createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public List<AnomaliaDTO> getAnomalias() {
+		return anomalias;
+	}
+
+	public void setAnomalias(List<AnomaliaDTO> anomalias) {
+		this.anomalias = anomalias;
 	}
 
 }

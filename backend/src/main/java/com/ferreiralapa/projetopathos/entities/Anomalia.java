@@ -39,6 +39,8 @@ public class Anomalia implements Serializable {
 	 * não aceita // repetições. Ex: a mesma Anomalia não pode pertencer ao mesmo
 	 * edíficio mais que 1 vez, para assegurar que na tabela intermédia não existam
 	 * repetições de pares.
+	 * 
+	 * a chave estrangeira da tabela onde estou - anomalia_id
 	 */
 	@ManyToMany
 	@JoinTable(name = "tb_anomalia_edificio", 
