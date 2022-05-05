@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ferreiralapa.projetopathos.dto.RoleDTO;
 import com.ferreiralapa.projetopathos.dto.UserDTO;
 import com.ferreiralapa.projetopathos.dto.UserInsertDTO;
+import com.ferreiralapa.projetopathos.dto.UserUpdateDTO;
 import com.ferreiralapa.projetopathos.entities.Role;
 import com.ferreiralapa.projetopathos.entities.User;
 import com.ferreiralapa.projetopathos.repositories.RoleRepository;
@@ -65,7 +65,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
 			User entity = userRepository.getById(id);
 			copyDtoToEntity(dto, entity);
