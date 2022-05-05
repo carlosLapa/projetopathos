@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.PastOrPresent;
+
 import com.ferreiralapa.projetopathos.entities.Anomalia;
 import com.ferreiralapa.projetopathos.entities.Edificio;
 
@@ -21,6 +23,8 @@ public class EdificioDTO implements Serializable {
 	private Integer piso;
 	private String fracao;
 	private String imgUrl;
+	
+	@PastOrPresent(message = "A data não pode ser futura")
 	private Instant date;
 	private Instant createdAt;
 

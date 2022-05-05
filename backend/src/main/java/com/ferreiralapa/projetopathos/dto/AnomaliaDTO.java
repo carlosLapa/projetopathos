@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.PastOrPresent;
+
 import com.ferreiralapa.projetopathos.entities.Anomalia;
 import com.ferreiralapa.projetopathos.entities.Edificio;
 
@@ -15,6 +17,8 @@ public class AnomaliaDTO implements Serializable {
 	private Long id;
 	private String consequente;
 	private String inconsequente;
+	
+	@PastOrPresent(message = "A data não pode ser futura")
 	private Instant date;
 	private String descricao;
 

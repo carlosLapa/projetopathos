@@ -2,6 +2,8 @@ package com.ferreiralapa.projetopathos.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,14 +55,14 @@ public class AnomaliaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<AnomaliaDTO> insert(@RequestBody AnomaliaDTO dto) {
+	public ResponseEntity<AnomaliaDTO> insert(@Valid @RequestBody AnomaliaDTO dto) {
 		dto = AnomaliaService.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<AnomaliaDTO> update(@PathVariable Long id, @RequestBody AnomaliaDTO dto) {
+	public ResponseEntity<AnomaliaDTO> update(@Valid @PathVariable Long id, @RequestBody AnomaliaDTO dto) {
 		dto = AnomaliaService.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}

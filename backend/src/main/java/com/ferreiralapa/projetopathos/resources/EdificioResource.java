@@ -2,6 +2,8 @@ package com.ferreiralapa.projetopathos.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,14 +55,14 @@ public class EdificioResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<EdificioDTO> insert(@RequestBody EdificioDTO dto) {
+	public ResponseEntity<EdificioDTO> insert(@Valid @RequestBody EdificioDTO dto) {
 		dto = edificioService.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<EdificioDTO> update(@PathVariable Long id, @RequestBody EdificioDTO dto) {
+	public ResponseEntity<EdificioDTO> update(@Valid @PathVariable Long id, @RequestBody EdificioDTO dto) {
 		dto = edificioService.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
