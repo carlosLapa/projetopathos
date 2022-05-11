@@ -1,5 +1,6 @@
 package com.ferreiralapa.projetopathos.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +12,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class AppConfig {
 
+	@Value("${jwt.secret}")
+	private String jwtSecret;
+	
 	/*
 	 * Anotação que serve para identificar um Componente, para instanciar e gerir a
 	 * injeção desta dependência noutros componentes - neste caso é uma anotação de
@@ -34,7 +38,7 @@ public class AppConfig {
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey("MY-JWT-SECRET");
+		tokenConverter.setSigningKey(jwtSecret);
 		return tokenConverter;
 	}
 
