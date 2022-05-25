@@ -45,8 +45,9 @@ public class AnomaliaDTO implements Serializable {
 
 	/*
 	 * Este construtor, instancia o AnomaliaDTO com a lista de edificios Para cada
-	 * edificio que chega no Set (argumento), executamos a função lambda, que insere
-	 * cada um deles, transformado para DTO, na lista de edificios da classe (this)
+	 * edificio(entity) que chega no Set (argumento), executamos a função lambda, que insere
+	 * cada um deles, (transformando para DTO), na lista de edificios da classe (this)
+	 * Assim convertemos uma AnomaliaDTO para Anomalia entity, mas já COM uma lista de Edificios
 	 * 
 	 */
 	public AnomaliaDTO(Anomalia entity, Set<Edificio> edificios) {

@@ -24,8 +24,13 @@ INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, 
 INSERT INTO tb_anomalia (consequente, inconsequente, descricao, date) VALUES ('Sim', 'Não', 'Causou patologias', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
 INSERT INTO tb_anomalia (consequente, inconsequente, descricao, date) VALUES ('Não', 'Sim', 'Não causou patologias', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
 
+INSERT INTO tb_causa (tipologia, descricao) VALUES ('Estrutural', 'Fissura no pilar');
+INSERT INTO tb_causa (tipologia, descricao) VALUES ('Térmica', 'Falta de isolamento');
 
 INSERT INTO tb_anomalia_edificio (anomalia_id, edificio_id) VALUES (1, 2);
 INSERT INTO tb_anomalia_edificio (anomalia_id, edificio_id) VALUES (2, 1);
 INSERT INTO tb_anomalia_edificio (anomalia_id, edificio_id) VALUES (1, 3);
 INSERT INTO tb_anomalia_edificio (anomalia_id, edificio_id) VALUES (1, 4);
+
+INSERT INTO tb_causa_anomalia (causa_id, anomalia_id) VALUES (1, 1);
+INSERT INTO tb_causa_anomalia (causa_id, anomalia_id) VALUES (2, 2);

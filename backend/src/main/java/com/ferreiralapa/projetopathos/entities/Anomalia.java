@@ -27,7 +27,7 @@ public class Anomalia implements Serializable {
 	// Aqui talvez faça mais sentido ser um boolean - pois teve consequencia ou nao
 	private String consequente;
 	private String inconsequente;
-	
+
 	@Column(columnDefinition = "TEXT")
 	private String descricao;
 
@@ -43,10 +43,12 @@ public class Anomalia implements Serializable {
 	 * a chave estrangeira da tabela onde estou - anomalia_id
 	 */
 	@ManyToMany
-	@JoinTable(name = "tb_anomalia_edificio", 
-		joinColumns = @JoinColumn(name = "anomalia_id"),
-		inverseJoinColumns = @JoinColumn(name = "edificio_id"))
+	@JoinTable(name = "tb_anomalia_edificio", joinColumns = @JoinColumn(name = "anomalia_id"), inverseJoinColumns = @JoinColumn(name = "edificio_id"))
 	Set<Edificio> edificios = new HashSet<>();
+
+	/* Para aceder às causas associadas a cada anomalia */
+	@ManyToMany(mappedBy = "anomalias")
+	private Set<Causa> causas = new HashSet<>();
 
 	public Anomalia() {
 	}
@@ -100,6 +102,10 @@ public class Anomalia implements Serializable {
 
 	public Set<Edificio> getEdificios() {
 		return edificios;
+	}
+
+	public Set<Causa> getCausas() {
+		return causas;
 	}
 
 	@Override
