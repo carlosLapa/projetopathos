@@ -28,12 +28,14 @@ public class Patologia implements Serializable {
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant date;
+	private Instant createdAt;
 
 	public Patologia() {
 		super();
 	}
 
-	public Patologia(Long id, String tipologia, String dano, String descricao, String imgUrl, Instant date) {
+	public Patologia(Long id, String tipologia, String dano, String descricao, String imgUrl, Instant date,
+			Instant createdAt) {
 		super();
 		this.id = id;
 		this.tipologia = tipologia;
@@ -41,6 +43,7 @@ public class Patologia implements Serializable {
 		this.descricao = descricao;
 		this.imgUrl = imgUrl;
 		this.date = date;
+		this.createdAt = createdAt;
 	}
 
 	public Long getId() {
@@ -89,6 +92,14 @@ public class Patologia implements Serializable {
 
 	public void setDate(Instant date) {
 		this.date = date;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	@Override

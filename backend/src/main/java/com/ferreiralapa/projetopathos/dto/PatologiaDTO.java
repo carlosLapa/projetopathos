@@ -14,18 +14,21 @@ public class PatologiaDTO implements Serializable {
 	private String descricao;
 	private String imgUrl;
 	private Instant date;
+	private Instant createdAt;
 
 	public PatologiaDTO() {
 		super();
 	}
 
-	public PatologiaDTO(Long id, String tipologia, String dano, String descricao, String imgUrl, Instant date) {
+	public PatologiaDTO(Long id, String tipologia, String dano, String descricao, String imgUrl, Instant date,
+			Instant createdAt) {
 		this.id = id;
 		this.tipologia = tipologia;
 		this.dano = dano;
 		this.descricao = descricao;
 		this.imgUrl = imgUrl;
 		this.date = date;
+		this.createdAt = createdAt;
 	}
 
 	public PatologiaDTO(Patologia entity) {
@@ -35,6 +38,7 @@ public class PatologiaDTO implements Serializable {
 		this.descricao = entity.getDescricao();
 		this.imgUrl = entity.getImgUrl();
 		this.date = entity.getDate();
+		this.createdAt = entity.getCreatedAt();
 	}
 
 	public Long getId() {
@@ -83,6 +87,14 @@ public class PatologiaDTO implements Serializable {
 
 	public void setDate(Instant date) {
 		this.date = date;
+	}
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
 	}
 
 }

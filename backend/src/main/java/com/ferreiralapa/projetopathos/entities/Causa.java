@@ -66,6 +66,10 @@ public class Causa implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public Set<Anomalia> getAnomalias() {
+		return anomalias;
+	}
 
 	@Override
 	public int hashCode() {

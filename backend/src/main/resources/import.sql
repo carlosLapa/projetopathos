@@ -34,3 +34,5 @@ INSERT INTO tb_anomalia_edificio (anomalia_id, edificio_id) VALUES (1, 4);
 
 INSERT INTO tb_causa_anomalia (causa_id, anomalia_id) VALUES (1, 1);
 INSERT INTO tb_causa_anomalia (causa_id, anomalia_id) VALUES (2, 2);
+
+INSERT INTO tb_patologia (tipologia, dano, descricao, img_url, date, created_At) VALUES ('Prédio', 'Infiltrações', 'Água originou infiltrações e bolor', 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg', TIMESTAMP WITH TIME ZONE '2022-05-26T10:00:00Z', NOW());
