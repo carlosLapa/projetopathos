@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,12 +32,15 @@ public class Patologia implements Serializable {
 	private Instant date;
 	private Instant createdAt;
 
+	@ManyToOne
+	@JoinColumn(name = "anomalia_id")
+	private Anomalia anomalia;
+
 	public Patologia() {
-		super();
 	}
 
 	public Patologia(Long id, String tipologia, String dano, String descricao, String imgUrl, Instant date,
-			Instant createdAt) {
+			Instant createdAt, Anomalia anomalia) {
 		super();
 		this.id = id;
 		this.tipologia = tipologia;
@@ -44,6 +49,7 @@ public class Patologia implements Serializable {
 		this.imgUrl = imgUrl;
 		this.date = date;
 		this.createdAt = createdAt;
+		this.anomalia = anomalia;
 	}
 
 	public Long getId() {
@@ -100,6 +106,14 @@ public class Patologia implements Serializable {
 
 	public void setCreatedAt(Instant createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public Anomalia getAnomalia() {
+		return anomalia;
+	}
+
+	public void setAnomalia(Anomalia anomalia) {
+		this.anomalia = anomalia;
 	}
 
 	@Override

@@ -2,7 +2,9 @@ package com.ferreiralapa.projetopathos.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -50,10 +53,14 @@ public class Anomalia implements Serializable {
 	@ManyToMany(mappedBy = "anomalias")
 	private Set<Causa> causas = new HashSet<>();
 
+	@OneToMany(mappedBy = "anomalia")
+	private List<Patologia> patologias = new ArrayList<>();
+
 	public Anomalia() {
 	}
 
 	public Anomalia(String consequente, String inconsequente, Instant date, String descricao) {
+		super();
 		this.consequente = consequente;
 		this.inconsequente = inconsequente;
 		this.date = date;
@@ -106,6 +113,10 @@ public class Anomalia implements Serializable {
 
 	public Set<Causa> getCausas() {
 		return causas;
+	}
+
+	public List<Patologia> getPatologias() {
+		return patologias;
 	}
 
 	@Override
