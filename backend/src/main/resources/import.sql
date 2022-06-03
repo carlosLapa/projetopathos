@@ -38,3 +38,6 @@ INSERT INTO tb_causa_anomalia (causa_id, anomalia_id) VALUES (2, 2);
 INSERT INTO tb_patologia (tipologia, dano, descricao, img_url, date, created_At, anomalia_id) VALUES ('Prédio', 'Infiltrações', 'Água originou infiltrações e bolor', 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg', TIMESTAMP WITH TIME ZONE '2022-05-26T10:00:00Z', NOW(), 1);
 INSERT INTO tb_patologia (tipologia, dano, descricao, img_url, date, created_At, anomalia_id) VALUES ('Prédio', 'Fissuras', 'Trepidação das reparações originaram fissurações', 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg', TIMESTAMP WITH TIME ZONE '2022-05-26T10:00:00Z', NOW(), 1);
 
+INSERT INTO tb_tratamento (tipologia, procedimento, diagnostico, produto, img_url, patologia_id) VALUES ('Prédio', 'Enchimento das fissuras', 'Estrutura degradada em estado grave', 'Cimento - CIMPOR', 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg', 1);
+
+

@@ -2,6 +2,8 @@ package com.ferreiralapa.projetopathos.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +38,9 @@ public class Patologia implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "anomalia_id")
 	private Anomalia anomalia;
+
+	@OneToMany(mappedBy = "patologia")
+	private List<Tratamento> tratamentos = new ArrayList<>();
 
 	public Patologia() {
 	}
@@ -114,6 +120,10 @@ public class Patologia implements Serializable {
 
 	public void setAnomalia(Anomalia anomalia) {
 		this.anomalia = anomalia;
+	}
+
+	public List<Tratamento> getTratamentos() {
+		return tratamentos;
 	}
 
 	@Override

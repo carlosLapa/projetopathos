@@ -23,6 +23,7 @@ public class Causa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(columnDefinition = "TEXT")
 	private String tipologia;
 
 	@Column(columnDefinition = "TEXT")
