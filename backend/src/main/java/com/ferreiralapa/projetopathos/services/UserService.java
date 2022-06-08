@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
 
 	/* Para fornecer mais info e auxiliar nos testes */
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -43,6 +43,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+
+	@Autowired
+	private AuthService authService;
 
 	/*
 	 * @Transactional(readOnly = true) public List<UserDTO> findAll() { List<User>
@@ -58,8 +61,9 @@ public class UserService implements UserDetailsService {
 
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
+		authService.validateSelfOrAdmin(id);	
 		Optional<User> obj = userRepository.findById(id);
-		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("User não encontrada!"));
+		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new UserDTO(entity);
 	}
 
@@ -113,7 +117,6 @@ public class UserService implements UserDetailsService {
 	/* Dado um username (email) devolve os detalhes do user */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
 		User user = userRepository.findByEmail(username);
 		if (user == null) {
 			logger.error("Utilizador não encontrado " + username);
