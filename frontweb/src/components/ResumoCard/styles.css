@@ -1,0 +1,8 @@
+.resumo-patologia-container {
+    display: flex;
+}
+
+.resumo-patologia-container h3 {
+    font-size: 32px;
+    color: #000000;
+}
