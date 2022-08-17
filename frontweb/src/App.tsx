@@ -1,10 +1,10 @@
-import Patologia from 'pages/Patologia';
 import './assets/styles/custom.scss';
 import './App.css';
+import Routes from 'Routes';
 
 const App = () => {
   return (
-      <Patologia />
+      <Routes />
   );
 };
 
