@@ -16,9 +16,11 @@ const Home = () => {
                 aplicação de materiais, relativas a patologias na construção
               </p>
             </div>
-            <Link to="/patologias">
-              <ButtonIcon />
-            </Link>
+            <div>
+              <Link to="/patologias">
+                <ButtonIcon />
+              </Link>
+            </div>
           </div>
           <div className="home-image-container">
             <MainImage />
