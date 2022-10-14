@@ -1,8 +1,8 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from 'pages/Home';
 import Navbar from 'components/Navbar';
-import Patologia from 'pages/Patologia';
 import Admin from 'pages/Admin';
+import Catalogo from 'pages/Catalogo';
 
 const Routes = () => {
   return (
@@ -12,8 +12,8 @@ const Routes = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/patologias">
-          <Patologia />
+        <Route path="/edificios">
+          <Catalogo />
         </Route>
         <Route path="/admin">
           <Admin />

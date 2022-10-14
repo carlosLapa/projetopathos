@@ -1,10 +1,14 @@
 import './styles.css';
 
-const ResumoCard = () => {
+type Props = {
+  descricao: string;
+};
+
+const ResumoCard = ({ descricao }: Props) => {
   return (
     <>
       <div className="resumo-patologia-container">
-        <h3>Descrição sumária</h3>
+        <h3>{descricao}</h3>
       </div>
     </>
   );

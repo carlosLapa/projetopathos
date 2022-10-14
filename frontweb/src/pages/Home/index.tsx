@@ -12,13 +12,13 @@ const Home = () => {
             <div>
               <h1>Patologias na construção</h1>
               <p>
-                Repositório de informação sobre abordagens, tratamentos e
-                aplicação de materiais, relativas a patologias na construção
+                Repositório de informação sobre as causas, abordagens, aplicação
+                de materiais e tratamento.
               </p>
             </div>
             <div>
-              <Link to="/patologias">
-                <ButtonIcon text="Iniciar busca"/>
+              <Link to="/edificios">
+                <ButtonIcon text="Iniciar busca" />
               </Link>
             </div>
           </div>

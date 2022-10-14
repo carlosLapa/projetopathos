@@ -31,13 +31,8 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/patologias" activeClassName="active">
+              <NavLink to="/edificios" activeClassName="active">
                 EDIFICIOS
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/patologias" activeClassName="active">
-                PATOLOGIAS
               </NavLink>
             </li>
             <li>
