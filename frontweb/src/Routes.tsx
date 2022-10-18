@@ -3,6 +3,7 @@ import Home from 'pages/Home';
 import Navbar from 'components/Navbar';
 import Admin from 'pages/Admin';
 import Catalogo from 'pages/Catalogo';
+import EdificioDetails from 'pages/EdificioDetails';
 
 const Routes = () => {
   return (
@@ -12,8 +13,11 @@ const Routes = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/edificios">
+        <Route path="/edificios" exact>
           <Catalogo />
+        </Route>
+        <Route path="/edificios/:edificioId">
+          <EdificioDetails />
         </Route>
         <Route path="/admin">
           <Admin />
