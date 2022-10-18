@@ -1,0 +1,72 @@
+.edificio-details-container {
+  padding: 10px;
+  font-size: 24px;
+  border: 1px solid red;
+}
+
+.edificio-details-card {
+  padding: 10px;
+  border: 1px solid red;
+}
+
+/*
+display:flex -> para colocar os itens um à frente do outro
+align-items -> alinha os elementos dentro do div (neste caso, centrados)
+*/
+.go-back-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid red;
+}
+
+.go-back-container h2 {
+  margin-left: 15px;
+  font-size: 1em;
+  color: #263238;
+  letter-spacing: -0.015em;
+}
+
+.go-back-container svg {
+  color: #407bff;
+  transform: rotate(-180deg);
+  margin-left: 5px;
+}
+
+.img-container {
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid red;
+}
+
+.img-container img {
+  width: 80%;
+}
+
+.name-typology-container {
+  margin-bottom: 20px;
+  border: 1px solid red;
+}
+
+.name-typology-container h1 {
+  color: #263238;
+  font-size: 1em;
+  letter-spacing: -0.015em;
+}
+
+.description-container {
+  border: 1px solid red;
+}
+
+.description-container h2 {
+  color: #5a5656;
+  letter-spacing: -0.015em;
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+
+.description-container p {
+  color: #5a5656;
+  letter-spacing: -0.015em;
+  font-size: 0.6em;
+}
