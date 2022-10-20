@@ -2,6 +2,8 @@ import EdificioCard from 'components/EdificioCard';
 import { Link } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
 
+import './styles.css';
+
 const Catalogo = () => {
   const edificio: Edificio = {
     id: 3,
@@ -29,7 +31,11 @@ const Catalogo = () => {
   };
 
   return (
-    <div className="container my-4">
+    <div className="container my-4 catalog-container">
+      <div className="row catalog-title-container">
+        <h1>Edifícios intervencionados</h1>
+      </div>
+
       <div className="row">
         <div className="col-sm-6 col-lg-4 col-xl-6">
           <Link to="edificios/1">
