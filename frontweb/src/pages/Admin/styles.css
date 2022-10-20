@@ -1,0 +1,21 @@
+.admin-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-content {
+  padding: 20px;
+}
+
+@media (min-width: 1200px) {
+  .admin-container {
+    flex-direction: row;
+  }
+
+  /*
+  flex: 1 -> para ocupar toda a largura do container
+  */
+  .admin-content {
+    flex: 1;
+  }
+}
