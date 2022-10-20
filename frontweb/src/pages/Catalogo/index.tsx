@@ -1,4 +1,5 @@
 import EdificioCard from 'components/EdificioCard';
+import { Link } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
 
 const Catalogo = () => {
@@ -31,16 +32,24 @@ const Catalogo = () => {
     <div className="container my-4">
       <div className="row">
         <div className="col-sm-6 col-lg-4 col-xl-6">
-          <EdificioCard edificio={edificio} />
+          <Link to="edificios/1">
+            <EdificioCard edificio={edificio} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-6">
-          <EdificioCard edificio={edificio}/>
+          <Link to="edificios/1">
+            <EdificioCard edificio={edificio} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-6">
-          <EdificioCard edificio={edificio}/>
+          <Link to="edificios/1">
+            <EdificioCard edificio={edificio} />
+          </Link>
         </div>
         <div className="col-sm-6 col-lg-4 col-xl-6">
-          <EdificioCard edificio={edificio}/>
+          <Link to="edificios/1">
+            <EdificioCard edificio={edificio} />
+          </Link>
         </div>
       </div>
     </div>
