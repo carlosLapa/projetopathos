@@ -31,3 +31,21 @@
 .main-menu a:hover {
   color: #fff;
 }
+
+@media (min-width: 768px) {
+  .main-menu {
+    width: 350px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-menu {
+    width: 600px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .main-menu {
+    width: 1000px;
+  }
+}

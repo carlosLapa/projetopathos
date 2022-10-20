@@ -1,12 +1,10 @@
 .edificio-details-container {
   padding: 10px;
   font-size: 24px;
-  border: 1px solid red;
 }
 
 .edificio-details-card {
   padding: 10px;
-  border: 1px solid red;
 }
 
 /*
@@ -17,12 +15,11 @@ align-items -> alinha os elementos dentro do div (neste caso, centrados)
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  border: 1px solid red;
 }
 
 .go-back-container h2 {
   margin-left: 15px;
-  font-size: 1em;
+  font-size: 0.8em;
   color: #263238;
   letter-spacing: -0.015em;
 }
@@ -36,7 +33,9 @@ align-items -> alinha os elementos dentro do div (neste caso, centrados)
 .img-container {
   text-align: center;
   margin-bottom: 20px;
-  border: 1px solid red;
+  border: 1px solid #e1e1e1;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 .img-container img {
@@ -45,7 +44,6 @@ align-items -> alinha os elementos dentro do div (neste caso, centrados)
 
 .name-typology-container {
   margin-bottom: 20px;
-  border: 1px solid red;
 }
 
 .name-typology-container h1 {
@@ -55,7 +53,9 @@ align-items -> alinha os elementos dentro do div (neste caso, centrados)
 }
 
 .description-container {
-  border: 1px solid red;
+  border: 1px solid #e1e1e1;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 .description-container h2 {
@@ -69,4 +69,71 @@ align-items -> alinha os elementos dentro do div (neste caso, centrados)
   color: #5a5656;
   letter-spacing: -0.015em;
   font-size: 0.6em;
+}
+
+@media (min-width: 576px) {
+  .edificio-details-container {
+    padding: 20px;
+    font-size: 26px;
+  }
+
+  .edificio-details-card {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .edificio-details-container {
+    padding: 40px;
+    font-size: 28px;
+  }
+
+  .edificio-details-card {
+    padding: 40px;
+  }
+
+  .img-container img {
+    width: 70%;
+  }
+
+  .description-container {
+    padding: 40px;
+  }
+
+  .name-typology-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .img-container img {
+    height: 350px;
+    width: auto;
+  }
+
+  .name-typology-container {
+    display: block;
+  }
+
+  .description-container {
+    min-height: 373px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .img-container img {
+    height: 480px;
+    width: auto;
+  }
+
+  .name-typology-container {
+    display: block;
+  }
+
+  .description-container {
+    min-height: 500px;
+  }
 }
