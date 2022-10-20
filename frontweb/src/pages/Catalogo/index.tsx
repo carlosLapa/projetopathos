@@ -1,4 +1,5 @@
 import EdificioCard from 'components/EdificioCard';
+import Pagination from 'components/Pagination';
 import { Link } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
 
@@ -57,6 +58,10 @@ const Catalogo = () => {
             <EdificioCard edificio={edificio} />
           </Link>
         </div>
+      </div>
+
+      <div className="row">
+        <Pagination />
       </div>
     </div>
   );
