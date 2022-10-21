@@ -14,3 +14,8 @@ export type Edificio = {
   createdAt: string;
   anomalias: Anomalia[];
 };
+
+/*
+Os "types" servem para definir a estrutura de um objeto, isto quando fazemos uma chamada a uma API, neste caso ao nosso backend, 
+que devolverá um objecto que corresponderá a esta estrutura.
+*/ 
