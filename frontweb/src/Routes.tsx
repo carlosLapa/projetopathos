@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Home from 'pages/Home';
 import Navbar from 'components/Navbar';
 import Admin from 'pages/Admin';
@@ -19,6 +19,7 @@ const Routes = () => {
         <Route path="/edificios/:edificioId">
           <EdificioDetails />
         </Route>
+        <Redirect from="/admin" to="/admin/edificios" exact />
         <Route path="/admin">
           <Admin />
         </Route>
