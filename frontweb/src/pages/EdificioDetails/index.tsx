@@ -1,13 +1,24 @@
 import { ReactComponent as ArrowIcon } from 'assets/images/arrow.svg';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
 import { BASE_URL } from 'utils/requests';
 
 import './styles.css';
 
+type UrlParams = {
+  edificioId: string;
+}
+
+
 const EdificioDetails = () => {
+
+  /*Objeto desestruturado - para funcionar, temos q declará-lo através de um "type" antes de o utilizar 
+    Agora podemos capturar, (no axios.get) os parametros URL que forem passados
+  */
+  const { edificioId } = useParams<UrlParams>();
+
   const [edificio, setEdificio] = useState<Edificio>();
 
   /*
@@ -29,11 +40,14 @@ const EdificioDetails = () => {
   */
 
   useEffect(() => {
-    axios.get(BASE_URL + '/edificios/2')
+    axios.get(`${BASE_URL}/edificios/${edificioId}`)
     .then((response) => {
       setEdificio(response.data);
     });
-  }, []);
+  }, [edificioId]);
+  /* O useEffect tb faz o seguinte -> Se o edificioId mudar, a requisição get é chamada novamente para o atualizar 
+    semelhante a um "observer"
+  */
 
   return (
     <div className="edificio-details-container">
