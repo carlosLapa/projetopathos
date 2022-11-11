@@ -7,6 +7,7 @@ import { Edificio } from 'types/edificio';
 import { AxiosParams } from 'types/vendor/axios';
 import { SpringPage } from 'types/vendor/spring';
 import { BASE_URL } from 'utils/requests';
+import CardLoader from './CardLoader';
 
 import './styles.css';
 
@@ -26,6 +27,18 @@ const Catalogo = () => {
   */
   const [page, setPage] = useState<SpringPage<Edificio>>();
 
+  /*
+  Estado - boleano - que define se está a carregar uma renderização de algum elemento, ou não. Neste caso os loaders da página de edificios.
+  Não tem parâmetros, apenas o valor inicial do isLoading (boolean false), significando que não está a carregar aquando da montagem do componente e 
+  antes da requisição. 
+  Também antes da requisição do axios, mudamos o estado (true), para dizer que está a carregar.
+  O "finally" executa uma função depois que resolver a "promise". Neste caso, vai alterar novamente o setIsLoading para "false", para o estado
+  em que não está a carregar.
+  
+  */
+
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const params: AxiosParams = {
       method: 'GET',
@@ -36,13 +49,17 @@ const Catalogo = () => {
       },
     };
 
-    axios(params).then((response) => {
-      setPage(response.data);
-      console.log(page);
-    });
+    setIsLoading(true);
+    axios(params)
+      .then((response) => {
+        setPage(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-/* Renderizar dinamicamente os cards do edificio
+  /* Renderizar dinamicamente os cards do edificio
 Através do "page" (que é uma SpringPage do tipo EDIFICIO), temos acesso ao atributo "content", que contém a lista de edificios
 
 Quando o "page" tem o "?", é quando o "useState" está indefinido, ou seja, ainda não existe ou pode não ser retornado aquando a requisição
@@ -53,6 +70,8 @@ e faz algo com o mesmo. No corpo da função colocamos o jsx (tudo o que está d
 
 Quando renderizamos uma coleção/array de elementos, é exigência do react colocar em cada elemento, o atributo "key", que tem q possuir um valor único, 
 para cada elemento a renderizar, de modo a evitar a repetição. Assim colocamos o id de cada edificio. 
+
+Aplicamos uma renderização condicional ternária para renderizar a página de edificios.
 */
   return (
     <div className="container my-4 catalog-container">
@@ -61,15 +80,16 @@ para cada elemento a renderizar, de modo a evitar a repetição. Assim colocamos
       </div>
 
       <div className="row">
-        {page?.content.map((edificio) => {
-          return (
-            <div className="col-sm-6 col-lg-4 col-xl-6" key={edificio.id}>
-              <Link to="edificios/1">
-                <EdificioCard edificio={edificio} />
-              </Link>
-            </div>
-          );
-        })}
+        {isLoading ? <CardLoader /> : (
+          page?.content.map((edificio) => {
+            return (
+              <div className="col-sm-6 col-lg-4 col-xl-6" key={edificio.id}>
+                <Link to="edificios/1">
+                  <EdificioCard edificio={edificio} />
+                </Link>
+              </div>
+            );
+          }))}
       </div>
 
       <div className="row">
