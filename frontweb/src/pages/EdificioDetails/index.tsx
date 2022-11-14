@@ -4,21 +4,22 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
 import { BASE_URL } from 'utils/requests';
+import EdificioInfoLoader from './EdificioInfoLoader';
+import EdificioDetailsLoader from './EdificioDetailsLoader';
 
 import './styles.css';
 
 type UrlParams = {
   edificioId: string;
-}
-
+};
 
 const EdificioDetails = () => {
-
   /*Objeto desestruturado - para funcionar, temos q declará-lo através de um "type" antes de o utilizar 
     Agora podemos capturar, (no axios.get) os parametros URL que forem passados
   */
   const { edificioId } = useParams<UrlParams>();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [edificio, setEdificio] = useState<Edificio>();
 
   /*
@@ -40,10 +41,15 @@ const EdificioDetails = () => {
   */
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/edificios/${edificioId}`)
-    .then((response) => {
-      setEdificio(response.data);
-    });
+    setIsLoading(true);
+    axios
+      .get(`${BASE_URL}/edificios/${edificioId}`)
+      .then((response) => {
+        setEdificio(response.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [edificioId]);
   /* O useEffect tb faz o seguinte -> Se o edificioId mudar, a requisição get é chamada novamente para o atualizar 
     semelhante a um "observer"
@@ -60,25 +66,31 @@ const EdificioDetails = () => {
         </Link>
         <div className="row">
           <div className="col-xl-6">
-            <div className="img-container">
-              <img
-                src={edificio?.imgUrl}
-                alt={edificio?.nome}
-              />
-            </div>
-            <div className="name-typology-container">
-              <h1>{edificio?.nome}</h1>
-              <h3>{edificio?.tipologia}</h3>
-            </div>
+            {isLoading ? (
+              <EdificioInfoLoader />
+            ) : (
+              <>
+                <div className="img-container">
+                  <img src={edificio?.imgUrl} alt={edificio?.nome} />
+                </div>
+                <div className="name-typology-container">
+                  <h1>{edificio?.nome}</h1>
+                  <h3>{edificio?.tipologia}</h3>
+                </div>
+              </>
+            )}
           </div>
           <div className="col-xl-6">
-            <div className="description-container">
-              <h2>{edificio?.localizacao}</h2>
-              <p>
-              <h2>{edificio?.utilizacao}</h2>
-
-              </p>
-            </div>
+            {isLoading ? (
+              <EdificioDetailsLoader />
+            ) : (
+              <div className="description-container">
+                <h2>{edificio?.localizacao}</h2>
+                <p>
+                  <h2>{edificio?.utilizacao}</h2>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
