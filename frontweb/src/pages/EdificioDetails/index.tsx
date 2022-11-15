@@ -37,7 +37,8 @@ const EdificioDetails = () => {
   Depois utilizamos na response abaixo para atualizar.
 
   useEffect -> 2 argumentos. 1 função para executar (quando o componente for montado/renderizado) e 1 lista de dependencias 
-  (lista de objetos que queremos observar, quando é alterada, a função roda novamente - nova renderização)
+  (lista de objetos que queremos observar, quando é alterada, a função roda novamente - nova renderização), ou seja,
+  Se o edificioId mudar, a requisição get é chamada novamente para o atualizar, semelhante a um "observer"
   */
 
   useEffect(() => {
@@ -51,9 +52,6 @@ const EdificioDetails = () => {
         setIsLoading(false);
       });
   }, [edificioId]);
-  /* O useEffect tb faz o seguinte -> Se o edificioId mudar, a requisição get é chamada novamente para o atualizar 
-    semelhante a um "observer"
-  */
 
   return (
     <div className="edificio-details-container">
