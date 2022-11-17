@@ -1,10 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import EdificioCard from 'components/EdificioCard';
 import Pagination from 'components/Pagination';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
-import { AxiosParams } from 'types/vendor/axios';
 import { SpringPage } from 'types/vendor/spring';
 import { BASE_URL } from 'utils/requests';
 import CardLoader from './CardLoader';
@@ -40,13 +39,14 @@ const Catalogo = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const params: AxiosParams = {
+    const params: AxiosRequestConfig = {
       method: 'GET',
-      url: `${BASE_URL}/edificios`,
+      url: "/edificios",
+      baseURL: BASE_URL,
       params: {
         page: 0,
         size: 12,
-      },
+      }
     };
 
     setIsLoading(true);

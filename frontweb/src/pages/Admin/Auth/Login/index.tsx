@@ -9,14 +9,13 @@ type FormData = {
   password: string;
 };
 
-/*Agora podemos usar os campos do type, que recebe os dados do form, para parametrizar o useForm
-  Depois a função onSubmit vai receber o atributo formData, do tipo FormData.
-*/
+/*Agora podemos usar os campos do type, que representa os dados do formulário, para parametrizar o useForm
+  Depois a função onSubmit vai receber o atributo formData, do tipo FormData.*/
 
 const Login = () => {
   const { register, handleSubmit } = useForm<FormData>();
 
-  const onSubmit = (formData : FormData) => {
+  const onSubmit = (formData: FormData) => {
     console.log(formData);
   };
 
