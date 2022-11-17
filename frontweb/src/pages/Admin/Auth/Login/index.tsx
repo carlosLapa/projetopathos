@@ -1,17 +1,36 @@
 import { Link } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
+import { useForm } from 'react-hook-form';
 
 import './styles.css';
 
-/*mb-4 -> "margin-bottom 4" - estilo direto do bootstrap */
+type FormData = {
+  username: string;
+  password: string;
+};
+
+/*Agora podemos usar os campos do type, que recebe os dados do form, para parametrizar o useForm
+  Depois a função onSubmit vai receber o atributo formData, do tipo FormData.
+*/
 
 const Login = () => {
+  const { register, handleSubmit } = useForm<FormData>();
+
+  const onSubmit = (formData : FormData) => {
+    console.log(formData);
+  };
+
+  /*na tag do form -> "handleSubmit" will validate your inputs before invoking "onSubmit" */
+  /*abaixo, já dentro do form no input -> register your input into the hook by invoking the "register" function */
+
+  /*mb-4 -> "margin-bottom 4" - estilo direto do bootstrap */
   return (
     <div className="base-card login-card">
       <h1>LOGIN</h1>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <input
+            {...register('username')}
             type="text"
             className="form-control base-input"
             placeholder="Email"
@@ -20,6 +39,7 @@ const Login = () => {
         </div>
         <div className="mb-2">
           <input
+            {...register('password')}
             type="password"
             className="form-control base-input "
             placeholder="Password"

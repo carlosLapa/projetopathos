@@ -8,8 +8,8 @@ const Auth = () => {
   return (
     <div className="auth-container">
       <div className="auth-banner-container">
-        <h1>FL Lda.</h1>
-        <p>Repositório de informação relativo a patologias na construção civil</p>
+        <h1>Repositório de informação</h1>
+        <p>Patologias na construção civil</p>
         <AuthImage />
       </div>
       <div className="auth-form-container">

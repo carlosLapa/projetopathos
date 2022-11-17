@@ -51,6 +51,7 @@
 
   .auth-banner-container svg {
     width: 100%;
+    margin-top: 40px;
   }
 }
 
@@ -60,7 +61,7 @@
   }
 
   .auth-banner-container h1 {
-    font-size: 55px;
+    font-size: 45px;
   }
 
   .auth-banner-container p {
