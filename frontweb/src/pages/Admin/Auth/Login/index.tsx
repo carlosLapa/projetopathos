@@ -49,6 +49,11 @@ const Login = () => {
   /*Baixo, já dentro do form no input -> register your input into the hook by invoking the "register" function */
 
   /*mb-4 -> "margin-bottom 4" - estilo direto do bootstrap */
+
+  /*A crase `` permite colocar expressões do javascript 
+  Neste caso, vamos usar a crase para aplicar uma expressão condicional ternária, no css, para renderizar, ou não, o campo de input como inválido,
+  com o estilo do bootstrap
+  */
   return (
     <div className="base-card login-card">
       <h1>LOGIN</h1>
@@ -64,7 +69,7 @@ const Login = () => {
               }
             })}
             type="text"
-            className="form-control base-input"
+            className={`form-control base-input ${errors.username ? 'is-invalid' : ''}`}
             placeholder="Email"
             name="username"
           />
@@ -78,7 +83,7 @@ const Login = () => {
               required: 'Campo obrigatório',
             })}
             type="password"
-            className="form-control base-input "
+            className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`}
             placeholder="Password"
             name="password"
           />
