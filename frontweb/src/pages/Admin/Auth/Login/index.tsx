@@ -20,11 +20,17 @@ type FormData = {
   */
 
 const Login = () => {
+  /* useState, para renderização condicional de erro de preenchimento */
 
-  /* useState para renderização condicional de erro de preenchimento */
+  /* formState (desestruturado), para controlar o comportamento de validação do formulário. Como a função onde está implementado, 
+  o useForm já está parametrizado com a FormData e, portanto, ligado à variável "formData", este vai detetar erros de preenchimento no campo de 
+  input apropriados para cada um desses atributos. Depois ainda podemos usar o atributo "message" para fazer display da mensagem que definimos
+  no "required"  
+  */
+
   const [hasError, setHasError] = useState(false);
 
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit, formState: { errors }, } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
@@ -39,36 +45,46 @@ const Login = () => {
     console.log(formData);
   };
 
-  /*na tag do form -> "handleSubmit" will validate your inputs before invoking "onSubmit" */
-  /*abaixo, já dentro do form no input -> register your input into the hook by invoking the "register" function */
+  /*Na tag do form -> "handleSubmit" will validate your inputs before invoking "onSubmit" */
+  /*Baixo, já dentro do form no input -> register your input into the hook by invoking the "register" function */
 
   /*mb-4 -> "margin-bottom 4" - estilo direto do bootstrap */
   return (
     <div className="base-card login-card">
       <h1>LOGIN</h1>
-      {hasError && (
-        <div className="alert alert-danger">
-          Erro de Login!
-        </div>
-      )}
+      {hasError && <div className="alert alert-danger">Erro de Login!</div>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <input
-            {...register('username')}
+            {...register('username', {
+              required: 'Campo obrigatório',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Email inválido'
+              }
+            })}
             type="text"
             className="form-control base-input"
             placeholder="Email"
             name="username"
           />
+          <div className="invalid-feedback d-block">
+            {errors.username?.message}
+          </div>
         </div>
         <div className="mb-2">
           <input
-            {...register('password')}
+            {...register('password', {
+              required: 'Campo obrigatório',
+            })}
             type="password"
             className="form-control base-input "
             placeholder="Password"
             name="password"
           />
+          <div className="invalid-feedback d-block">
+            {errors.password?.message}
+          </div>
         </div>
         <Link to="/admin/auth/recover" className="login-link-recover">
           Esqueci a senha
