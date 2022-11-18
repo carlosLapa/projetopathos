@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
+import { requestBackendLogin } from 'utils/requests';
 
 import './styles.css';
+import { useState } from 'react';
 
 type FormData = {
   username: string;
@@ -10,12 +12,30 @@ type FormData = {
 };
 
 /*Agora podemos usar os campos do type, que representa os dados do formulário, para parametrizar o useForm
-  Depois a função onSubmit vai receber o atributo formData, do tipo FormData.*/
+  Depois a função onSubmit vai receber o atributo formData, do tipo FormData.
+  Para o login propriamente dito, podemos utilizar esse tipo tb, dado que temos os mesmos atributos,
+
+  Assim, na função onSubmit, chamamos a função "requestBackendLogin" (folder -> utils -> requests) e passamos como argumento o formData
+  Sendo uma promise, implementamos a estrutura habitual .then e .catch
+  */
 
 const Login = () => {
+
+  /* useState para renderização condicional de erro de preenchimento */
+  const [hasError, setHasError] = useState(false);
+
   const { register, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (formData: FormData) => {
+    requestBackendLogin(formData)
+      .then((response) => {
+        setHasError(false);
+        console.log('SUCESSO', response);
+      })
+      .catch((error) => {
+        setHasError(true);
+        console.log('ERRO');
+      });
     console.log(formData);
   };
 
@@ -26,6 +46,11 @@ const Login = () => {
   return (
     <div className="base-card login-card">
       <h1>LOGIN</h1>
+      {hasError && (
+        <div className="alert alert-danger">
+          Erro de Login!
+        </div>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <input
