@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
-import { BASE_URL } from 'utils/requests';
+import { BASE_URL } from 'util/requests';
 import EdificioInfoLoader from './EdificioInfoLoader';
 import EdificioDetailsLoader from './EdificioDetailsLoader';
 

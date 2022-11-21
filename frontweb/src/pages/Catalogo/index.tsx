@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import EdificioCard from 'components/EdificioCard';
 import Pagination from 'components/Pagination';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
 import { SpringPage } from 'types/vendor/spring';
-import { BASE_URL } from 'utils/requests';
+import { BASE_URL, requestBackend } from 'util/requests';
 import CardLoader from './CardLoader';
 
 import './styles.css';
@@ -42,7 +42,6 @@ const Catalogo = () => {
     const params: AxiosRequestConfig = {
       method: 'GET',
       url: "/edificios",
-      baseURL: BASE_URL,
       params: {
         page: 0,
         size: 12,
@@ -50,7 +49,7 @@ const Catalogo = () => {
     };
 
     setIsLoading(true);
-    axios(params)
+    requestBackend(params)
       .then((response) => {
         setPage(response.data);
       })
