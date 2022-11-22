@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
 import { getAuthData, requestBackendLogin, saveAuthData } from 'util/requests';
@@ -32,6 +32,11 @@ const Login = () => {
 
   const { register, handleSubmit, formState: { errors }, } = useForm<FormData>();
 
+  /* Função do react-router-dom - Permite que façamos redireccionamento e mudança de rota programaticamente 
+  neste caso usamos o ".push" que acrescenta uma nova rota na pilha de rotas, que "desempilha" ao voltar às rotas
+  */
+  const history = useHistory();
+
   const onSubmit = (formData: FormData) => {
     requestBackendLogin(formData)
       .then((response) => {
@@ -40,6 +45,7 @@ const Login = () => {
         console.log('TOKEN GERADO: ' + token);
         setHasError(false);
         console.log('SUCESSO', response);
+        history.push('/admin');
       })
       .catch((error) => {
         setHasError(true);
