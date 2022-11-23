@@ -1,6 +1,18 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import qs from 'qs';
 import history from './history';
+import jwtDecode from 'jwt-decode';
+
+/* Tipo um Enum, para auxiliar a descodificar o token */
+
+type Role = 'ROLE_OPERATOR' | 'ROLE_OPERATOR';
+
+/* tipo para descodificar o token e verificar o tempo de expiração */
+type TokenData = {
+  exp: number;
+  user_name: string;
+  authorities: Role[];
+};
 
 /* tipo que define a estrutura de resposta do login */
 type LoginResponse = {
@@ -128,3 +140,21 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+/*Função para descodificar o token */
+export const getTokenData = (): TokenData | undefined => {
+  try {
+    return jwtDecode(getAuthData().access_token);
+  } catch (error) {
+    return undefined;
+  }
+};
+
+/*Função para verificar se um User está autenticado 
+Essencialmente, recorrendo ao Unix Time Stamp, comparamos se a nossa data atual é menor que o tempo definido no token (ultimos 2 algarismos)
+Se true, o token é válido e o user está autenticado.
+*/
+export const isAuthenticated = (): boolean => {
+  const tokenData = getTokenData();
+  return tokenData && tokenData.exp * 1000 > Date.now() ? true : false;
+};
