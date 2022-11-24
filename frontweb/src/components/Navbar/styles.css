@@ -32,15 +32,40 @@
   color: #fff;
 }
 
+.nav-login-logout {
+  display: none;
+}
+
+.nav-username {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .main-menu {
     width: 350px;
+  }
+
+  .nav-login-logout {
+    display: unset;
+    color: #fff;
+    margin-right: 5px;
+  }
+}
+
+@media (min-width: 992px) {
+  .nav-login-logout {
+    margin-right: 40px;
+  }
+
+  .nav-username {
+    display: unset;
+    margin-right: 20px;
   }
 }
 
 @media (min-width: 1200px) {
   .main-menu {
-    width: 600px;
+    width: 550px;
   }
-}
 
+}

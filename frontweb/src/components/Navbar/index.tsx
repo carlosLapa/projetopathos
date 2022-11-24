@@ -20,7 +20,7 @@ type AuthData = {
 const Navbar = () => {
   const [authData, setAuthData] = useState<AuthData>({ authenticated: false });
 
-  /*useEffect para carregar os dados do local storage*/
+  /*useEffect para carregar os dados do local storage e alterar, consoante a situação, os estados de autenticação */
   useEffect(() => {
     if (isAuthenticated()) {
       setAuthData({
@@ -34,6 +34,12 @@ const Navbar = () => {
     }
   }, []);
 
+  /*função "Handler" para definir o que acontece após o Logout 
+  o preventDefault evita a navegação do link 
+  o token é removido
+  o estado de autenticação é definido para false
+  o método do history, .replace, leva-nos para a rota raíz, a homepage
+  */
   const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     removeAuthData();
@@ -63,7 +69,7 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="ferreiralapa-navbar">
-          <ul className="navbar-nav offset-md-4 main-menu">
+          <ul className="navbar-nav offset-md-2 main-menu">
             <li>
               <NavLink to="/" activeClassName="active" exact>
                 HOME
@@ -81,10 +87,12 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div>
+        {/* renderização condicional - consoante o estado de autenticação, renderiza o username (email) e o Logout (se true), ou Login (se false)
+        depois temos o evento "onClick" que recebe a função criada por nós , "handleLogoutClick" */}
+        <div className="nav-login-logout">
           {authData.authenticated ? (
             <>
-              <span>{authData.tokenData?.user_name}</span>
+              <span className="nav-username">{authData.tokenData?.user_name}</span>
               <a href="#logout" onClick={handleLogoutClick}>
                 LOGOUT
               </a>
