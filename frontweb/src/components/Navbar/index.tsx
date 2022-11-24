@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import history from 'util/history';
 
+/*type, com os dados do tokenData e true/false para o estado authenticated, para possibilitar a lógica de Login/Logout */
 type AuthData = {
   authenticated: boolean;
   tokenData?: TokenData;
