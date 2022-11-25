@@ -1,10 +1,11 @@
 import { Link, useHistory } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
-import { getAuthData, requestBackendLogin, saveAuthData } from 'util/requests';
+import { getAuthData, getTokenData, requestBackendLogin, saveAuthData } from 'util/requests';
 
 import './styles.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from 'AuthContext';
 
 type FormData = {
   username: string;
@@ -15,11 +16,17 @@ type FormData = {
   Depois a função onSubmit vai receber o atributo formData, do tipo FormData.
   Para o login propriamente dito, podemos utilizar esse tipo tb, dado que temos os mesmos atributos,
 
-  Assim, na função onSubmit, chamamos a função "requestBackendLogin" (folder -> utils -> requests) e passamos como argumento o formData
+ Na função onSubmit, chamamos a função "requestBackendLogin" (folder -> utils -> requests) e passamos como argumento o formData
+  depois salva os dados no localStorage, verificamos q não há erro e redireciona para o /admin.
   Sendo uma promise, implementamos a estrutura habitual .then e .catch
   */
 
 const Login = () => {
+  /**Referência do contexto global - para utilizar na função onSubmit de login, onde fazemos a sobrescrita (set) do estado
+   * 
+   */
+  const { setAuthContextData } = useContext(AuthContext); 
+
   /* useState, para renderização condicional de erro de preenchimento */
 
   /* formState (desestruturado), para controlar o comportamento de validação do formulário. Como a função onde está implementado, 
@@ -41,10 +48,11 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((response) => {
         saveAuthData(response.data);
-        const token = getAuthData().access_token;
-        console.log('TOKEN GERADO: ' + token);
         setHasError(false);
-        console.log('SUCESSO', response);
+        setAuthContextData({
+          authenticated: true,
+          tokenData: getTokenData(),
+        })
         history.push('/admin');
       })
       .catch((error) => {
