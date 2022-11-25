@@ -1,11 +1,11 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import ButtonIcon from 'components/ButtonIcon';
 import { useForm } from 'react-hook-form';
-import { getAuthData, getTokenData, requestBackendLogin, saveAuthData } from 'util/requests';
-
-import './styles.css';
+import { getTokenData, requestBackendLogin, saveAuthData } from 'util/requests';
 import { useContext, useState } from 'react';
 import { AuthContext } from 'AuthContext';
+
+import './styles.css';
 
 type FormData = {
   username: string;
@@ -13,34 +13,48 @@ type FormData = {
 };
 
 /*Agora podemos usar os campos do type, que representa os dados do formulário, para parametrizar o useForm
-  Depois a função onSubmit vai receber o atributo formData, do tipo FormData.
-  Para o login propriamente dito, podemos utilizar esse tipo tb, dado que temos os mesmos atributos,
+ *  Depois a função onSubmit vai receber o atributo formData, do tipo FormData.
+ *  Para o login propriamente dito, podemos utilizar esse tipo tb, dado que temos os mesmos atributos,
 
- Na função onSubmit, chamamos a função "requestBackendLogin" (folder -> utils -> requests) e passamos como argumento o formData
-  depois salva os dados no localStorage, verificamos q não há erro e redireciona para o /admin.
-  Sendo uma promise, implementamos a estrutura habitual .then e .catch
+ *  Na função onSubmit, chamamos a função "requestBackendLogin" (folder -> utils -> requests) e passamos como argumento o formData
+ *  depois salva os dados no localStorage, verificamos q não há erro e redireciona para o /admin.
+ *  Sendo uma promise, implementamos a estrutura habitual .then e .catch
   */
 
+/**type para obter o "from" do PrivateRoute*/
+type LocationState = {
+  from: string;
+};
+
 const Login = () => {
-  /**Referência do contexto global - para utilizar na função onSubmit de login, onde fazemos a sobrescrita (set) do estado
-   * 
-   */
-  const { setAuthContextData } = useContext(AuthContext); 
+ 
+  const location = useLocation<LocationState>();
+
+  const { from } = location.state || { from: { pathname: '/admin' } }
+
+  /**Referência do contexto global - para utilizar na função onSubmit de login, onde fazemos a sobrescrita (set) do estado */
+  const { setAuthContextData } = useContext(AuthContext);
 
   /* useState, para renderização condicional de erro de preenchimento */
 
-  /* formState (desestruturado), para controlar o comportamento de validação do formulário. Como a função onde está implementado, 
-  o useForm já está parametrizado com a FormData e, portanto, ligado à variável "formData", este vai detetar erros de preenchimento no campo de 
-  input apropriados para cada um desses atributos. Depois ainda podemos usar o atributo "message" para fazer display da mensagem que definimos
-  no "required"  
-  */
+  /* formState (desestruturado), para controlar o comportamento de validação do formulário. Como a função onde está implementado,
+   * o useForm já está parametrizado com a FormData e, portanto, ligado à variável "formData", este vai detetar erros de preenchimento no campo de
+   * input apropriados para cada um desses atributos. Depois ainda podemos usar o atributo "message" para fazer display da mensagem que definimos
+   * no "required"
+   */
 
   const [hasError, setHasError] = useState(false);
 
-  const { register, handleSubmit, formState: { errors }, } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
 
-  /* Função do react-router-dom - Permite que façamos redireccionamento e mudança de rota programaticamente 
-  neste caso usamos o ".push" que acrescenta uma nova rota na pilha de rotas, que "desempilha" ao voltar às rotas
+  /**  Função do react-router-dom - Permite que façamos redireccionamento e mudança de rota programaticamente
+   * neste caso usamos o ".push" que acrescenta uma nova rota na pilha de rotas, que "desempilha" ao voltar às rotas
+   * no entanto, para melhorar a experiencia de navegação, substituimos o .push pelo .replace, que substitui pela rota anterior
+   * onde o user estava 
   */
   const history = useHistory();
 
@@ -52,8 +66,8 @@ const Login = () => {
         setAuthContextData({
           authenticated: true,
           tokenData: getTokenData(),
-        })
-        history.push('/admin');
+        });
+        history.replace(from);
       })
       .catch((error) => {
         setHasError(true);
@@ -67,10 +81,10 @@ const Login = () => {
 
   /*mb-4 -> "margin-bottom 4" - estilo direto do bootstrap */
 
-  /*A crase `` permite colocar expressões do javascript 
-  Neste caso, vamos usar a crase para aplicar uma expressão condicional ternária, no css, para renderizar, ou não, o campo de input como inválido,
-  com o estilo do bootstrap
-  */
+  /* A crase `` permite colocar expressões do javascript
+   * Neste caso, vamos usar a crase para aplicar uma expressão condicional ternária, no css, para renderizar, ou não, o campo de input como inválido,
+   * com o estilo do bootstrap
+   */
   return (
     <div className="base-card login-card">
       <h1>LOGIN</h1>
@@ -82,11 +96,13 @@ const Login = () => {
               required: 'Campo obrigatório',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Email inválido'
-              }
+                message: 'Email inválido',
+              },
             })}
             type="text"
-            className={`form-control base-input ${errors.username ? 'is-invalid' : ''}`}
+            className={`form-control base-input ${
+              errors.username ? 'is-invalid' : ''
+            }`}
             placeholder="Email"
             name="username"
           />
@@ -100,7 +116,9 @@ const Login = () => {
               required: 'Campo obrigatório',
             })}
             type="password"
-            className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`}
+            className={`form-control base-input ${
+              errors.password ? 'is-invalid' : ''
+            }`}
             placeholder="Password"
             name="password"
           />
