@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 
 /* Tipo um Enum, para auxiliar a descodificar o token */
 
-type Role = 'ROLE_ADMIN' | 'ROLE_OPERATOR';
+export type Role = 'ROLE_ADMIN' | 'ROLE_OPERATOR';
 
 /* tipo para descodificar o token e verificar o tempo de expiração */
 export type TokenData = {
@@ -138,7 +138,7 @@ axios.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    if (error.response.status === 401 || error.response.status === 403) {
+    if (error.response.status === 401) {
       history.push('admin/auth');
     }
     return Promise.reject(error);
