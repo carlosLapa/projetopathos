@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 
 /* Tipo um Enum, para auxiliar a descodificar o token */
 
-type Role = 'ROLE_OPERATOR' | 'ROLE_OPERATOR';
+type Role = 'ROLE_ADMIN' | 'ROLE_OPERATOR';
 
 /* tipo para descodificar o token e verificar o tempo de expiração */
 export type TokenData = {
@@ -114,7 +114,7 @@ export const getAuthData = () => {
 
 export const removeAuthData = () => {
   localStorage.removeItem(tokenKey);
-}
+};
 
 // Add a request interceptor
 axios.interceptors.request.use(
@@ -154,11 +154,29 @@ export const getTokenData = (): TokenData | undefined => {
   }
 };
 
-/*Função para verificar se um User está autenticado 
-Essencialmente, recorrendo ao Unix Time Stamp, comparamos se a nossa data atual é menor que o tempo definido no token (ultimos 2 algarismos)
-Se true, o token é válido e o user está autenticado.
-*/
+/** Função para verificar se um User está autenticado
+ * Essencialmente, recorrendo ao Unix Time Stamp, comparamos se a nossa data atual é menor que o tempo definido no token (ultimos 2 algarismos)
+ * Se true, o token é válido e o user está autenticado.
+ * */
 export const isAuthenticated = (): boolean => {
   const tokenData = getTokenData();
   return tokenData && tokenData.exp * 1000 > Date.now() ? true : false;
+};
+
+/**Função para determinar os Roles dos users
+ * Utiliza os "Enums" definidos, admin e operator
+ * e a tokenData -> token que contém info sobre o user, especificamente neste caso, importam os roles que possuem
+ */
+export const hasAnyRoles = (roles: Role[]): boolean => {
+  if (roles.length === 0) {
+    return true;
+  }
+
+  const tokenData = getTokenData();
+
+  if (tokenData !== undefined) {
+    return roles.some((role) => tokenData.authorities.includes(role));
+  }
+
+  return false;
 };
