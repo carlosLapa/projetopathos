@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import { hasAnyRoles, isAuthenticated, Role } from 'util/requests';
+import { hasAnyRoles, isAuthenticated, Role } from 'util/auth';
 
 type Props = {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ type Props = {
  * no render, colocamos um argumento, location
  * no redirect, colocamos uma expressão com um objeto
  *
- * Acrescentamos testes para as permissões, do mais restrito para o mais "livre"
+ * Acrescentámos testes para as permissões, do mais restrito para o mais "livre"
  * Testamos então se o user está autenticado (se não, direcciona para o login) e depois caso esteja, 
  * testamos o role que possui (se não, direciona para a pagina geral dos edificios - que todos podem aceder),
  * caso tenha o role (neste admin), renderiza o children.

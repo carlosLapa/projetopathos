@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { TokenData } from 'util/requests';
+import { TokenData } from 'util/auth';
 
 /*type, com os dados do tokenData e true/false para o estado authenticated, para possibilitar a lógica de Login/Logout 
 
