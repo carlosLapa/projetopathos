@@ -1,7 +1,8 @@
 import { Switch } from 'react-router-dom';
 import Navbar from './Navbar';
-import Users from './User';
+import Users from './Users';
 import PrivateRoute from 'components/PrivateRoute';
+import Edificios from './Edificios';
 
 import './styles.css';
 
@@ -12,9 +13,9 @@ const Admin = () => {
       <div className="admin-content">
         <Switch>
           <PrivateRoute path="/admin/edificios">
-            <h1>Edificio CRUD</h1>
+            <Edificios />
           </PrivateRoute>
-          <PrivateRoute path="/admin/anomalias" >
+          <PrivateRoute path="/admin/anomalias">
             <h1>Anomalia CRUD</h1>
           </PrivateRoute>
           <PrivateRoute path="/admin/users" roles={['ROLE_ADMIN']}>
