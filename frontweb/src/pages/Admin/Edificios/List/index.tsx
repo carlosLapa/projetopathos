@@ -1,4 +1,4 @@
-import EdificioCrudCard from 'components/EdificioCrudCard';
+import EdificioCrudCard from 'pages/Admin/Edificios/EdificioCrudCard';
 import { Link } from 'react-router-dom';
 
 import './styles.css';

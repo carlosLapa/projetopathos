@@ -1,0 +1,28 @@
+.edificio-crud-card {
+    margin-bottom: 30px;
+}
+
+.edificio-crud-card-top-container {
+    padding: 16px 0;
+    border-bottom: 1px solid #e1e1e1;
+    text-align: center;
+}
+
+.edificio-crud-card-top-container img {
+    width: 250px;
+    height: 250px;
+}
+
+.edificio-crud-card-bottom-container {
+    padding: 15px 20px 30px 20px;
+}
+
+.edificio-crud-card-bottom-container h6 {
+    font-size: 20px;
+    color: #263238;
+}
+
+.edificio-crud-card-anomalia-container {
+    padding: 0 20px;
+    display: flex;
+}

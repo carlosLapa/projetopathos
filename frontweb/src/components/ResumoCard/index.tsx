@@ -8,7 +8,7 @@ const ResumoCard = ({ descricao }: Props) => {
   return (
     <>
       <div className="resumo-patologia-container">
-        <h3>{descricao}</h3>
+        <h5>{descricao}</h5>
       </div>
     </>
   );
