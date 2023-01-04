@@ -26,6 +26,22 @@ const List = () => {
         descricao: 'Não causou patologias',
         edificios: [],
       },
+      {
+        id: 1,
+        consequente: 'Não',
+        inconsequente: 'Sim',
+        date: '2022-04-14T10:00:00Z',
+        descricao: 'Não causou patologias',
+        edificios: [],
+      },
+      {
+        id: 3,
+        consequente: 'Não',
+        inconsequente: 'Sim',
+        date: '2022-04-14T10:00:00Z',
+        descricao: 'Não causou patologias',
+        edificios: [],
+      },
     ],
   };
 

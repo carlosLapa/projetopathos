@@ -25,6 +25,10 @@ const EdificioCrudCard = ({ edificio }: Props) => {
           ))}
         </div>
       </div>
+      <div className="edificio-crud-card-buttons-container">
+        <button className="btn btn-outline-danger edificio-crud-card-button edificio-crud-card-button-first">EXCLUIR</button>
+        <button className="btn btn-outline-secondary edificio-crud-card-button">EDITAR</button>
+      </div>
     </div>
   );
 };
