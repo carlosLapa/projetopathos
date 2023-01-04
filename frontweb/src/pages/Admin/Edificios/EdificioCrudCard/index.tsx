@@ -14,7 +14,7 @@ const EdificioCrudCard = ({ edificio }: Props) => {
       <div className="edificio-crud-card-top-container">
         <img src={edificio.imgUrl} alt={edificio.nome} />
       </div>
-      <div>
+      <div className="edificio-crud-card-description">
         <div className="edificio-crud-card-bottom-container">
           <h6>{edificio.nome}</h6>
           <ResumoCard descricao={edificio.tipologia} />

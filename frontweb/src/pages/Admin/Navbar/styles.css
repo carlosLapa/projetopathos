@@ -51,7 +51,7 @@ ul {
     Para preencher a toda a altura
     Os 70px são o desconto do espaço ocupado pela navbar principal  
     */
-    height: calc(100vh - 70px);
+    height: calc(130vh - 70px);
   }
 
   .admin-nav-item {

@@ -12,6 +12,7 @@
 .edificio-crud-card-top-container img {
   width: 250px;
   height: 250px;
+  padding: 10px;
 }
 
 .edificio-crud-card-bottom-container {
@@ -45,4 +46,45 @@
 
 .edificio-crud-card-button-first {
   margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  .edificio-crud-card {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .edificio-crud-card-buttons-container {
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+
+  .edificio-crud-card-button-first {
+    margin-right: 0;
+    margin-top: 20px;
+  }
+
+  .edificio-crud-card-button {
+    width: 150px;
+  }
+
+  .edificio-crud-card-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .edificio-crud-card-top-container {
+    border-bottom: 0;
+    margin-right: 10px;
+  }
+  
+}
+
+@media (min-width: 992px) { 
+  .edificio-crud-card-button {
+    width: 220px;
+
+  }
 }
