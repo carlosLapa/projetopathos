@@ -50,7 +50,7 @@ const List = () => {
    * A palavra "create" casa com a rota :/edificioId, temos somente que diferenciar posteriormente
    */
   return (
-    <>
+    <div className="edificio-crud-container">
       <div className="edificio-crud-bar-container">
         <Link to="/admin/edificios/create">
           <button className="btn btn-primary text-white btn-crud-add">
@@ -70,7 +70,7 @@ const List = () => {
           <EdificioCrudCard edificio={edificio} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
