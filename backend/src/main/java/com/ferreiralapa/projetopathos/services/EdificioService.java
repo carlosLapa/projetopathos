@@ -1,5 +1,7 @@
 package com.ferreiralapa.projetopathos.services;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -8,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,12 +37,14 @@ public class EdificioService {
 	 * List<Edificio> list = edificioRepository.findAll(); return
 	 * list.stream().map(x -> new EdificioDTO(x)).collect(Collectors.toList()); }
 	 */
-
+	
 	@Transactional(readOnly = true)
-	public Page<EdificioDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Edificio> list = edificioRepository.findAll(pageRequest);
-		return list.map(x -> new EdificioDTO(x));
-	}
+    public Page<EdificioDTO> findAllPaged(Long categoryId, String nome, Pageable pageable) {
+        List<Anomalia> categories = (categoryId == 0) ? null : Arrays.asList(anomaliaRepository.getOne(categoryId));
+        Page<Edificio> page = edificioRepository.find(categories, nome, pageable);
+        edificioRepository.findEdificiosWithAnomalias(page.getContent());
+        return page.map(x -> new EdificioDTO(x, x.getAnomalias()));
+    }
 
 	@Transactional(readOnly = true)
 	public EdificioDTO findById(Long id) {

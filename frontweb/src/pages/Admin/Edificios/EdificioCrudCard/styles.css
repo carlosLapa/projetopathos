@@ -24,13 +24,14 @@
   color: #263238;
 }
 
-.edificio-crud-card-anomalia-container {
+.edificio-crud-anomalia-container {
   display: flex;
   flex-wrap: wrap;
   padding: 0 20px;
 }
 
 .edificio-crud-card-buttons-container {
+  margin-top: 10px;
   padding: 0 20px;
   display: flex;
 }

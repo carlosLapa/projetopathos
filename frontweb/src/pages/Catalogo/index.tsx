@@ -30,10 +30,9 @@ const Catalogo = () => {
   Estado - boleano - que define se está a carregar uma renderização de algum elemento, ou não. Neste caso os loaders da página de edificios.
   Não tem parâmetros, apenas o valor inicial do isLoading (boolean false), significando que não está a carregar aquando da montagem do componente e 
   antes da requisição. 
-  Também antes da requisição do axios, mudamos o estado (true), para dizer que está a carregar.
+  Também antes da requisição do axios (requestBackend()), mudamos o estado (true), para dizer que está a carregar.
   O "finally" executa uma função depois que resolver a "promise". Neste caso, vai alterar novamente o setIsLoading para "false", para o estado
   em que não está a carregar.
-  
   */
 
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +58,7 @@ const Catalogo = () => {
   }, []);
 
   /* Renderizar dinamicamente os cards do edificio
-Através do "page" (que é uma SpringPage do tipo EDIFICIO), temos acesso ao atributo "content", que contém a lista de edificios
+Através do "page" (que, neste caso, é uma SpringPage do tipo EDIFICIO), temos acesso ao atributo "content", que contém a lista de edificios
 
 Quando o "page" tem o "?", é quando o "useState" está indefinido, ou seja, ainda não existe ou pode não ser retornado aquando a requisição
 A repetição de cada <div> é feita através da função de alta ordem "map". 

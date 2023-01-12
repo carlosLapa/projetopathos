@@ -19,9 +19,9 @@ const EdificioCrudCard = ({ edificio }: Props) => {
           <h6>{edificio.nome}</h6>
           <ResumoCard descricao={edificio.tipologia} />
         </div>
-        <div className="edificio-crud-card-anomalia-container">
+        <div className="edificio-crud-anomalia-container">
           {edificio.anomalias.map((anomalia) => (
-            <AnomaliaBadge name={anomalia.descricao} key={anomalia.id} />
+            <AnomaliaBadge descricao={anomalia.descricao} key={anomalia.id} />
           ))}
         </div>
       </div>
