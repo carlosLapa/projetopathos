@@ -13,16 +13,16 @@ const List = () => {
   const [page, setPage] = useState<SpringPage<Edificio>>();
 
   useEffect(() => {
-    const params: AxiosRequestConfig = {
+    const config: AxiosRequestConfig = {
       method: 'GET',
       url: '/edificios',
       params: {
         page: 0,
-        size: 10,
+        size: 12,
       },
     };
 
-    requestBackend(params).then((response) => {
+    requestBackend(config).then((response) => {
       setPage(response.data);
     });
   }, []);
