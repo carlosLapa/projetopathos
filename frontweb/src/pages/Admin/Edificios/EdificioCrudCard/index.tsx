@@ -3,6 +3,7 @@ import './styles.css';
 import ResumoCard from 'components/ResumoCard';
 import { Edificio } from 'types/edificio';
 import AnomaliaBadge from '../AnomaliaBadge';
+import { Link } from 'react-router-dom';
 
 type Props = {
   edificio: Edificio;
@@ -26,8 +27,14 @@ const EdificioCrudCard = ({ edificio }: Props) => {
         </div>
       </div>
       <div className="edificio-crud-card-buttons-container">
-        <button className="btn btn-outline-danger edificio-crud-card-button edificio-crud-card-button-first">EXCLUIR</button>
-        <button className="btn btn-outline-secondary edificio-crud-card-button">EDITAR</button>
+        <button className="btn btn-outline-danger edificio-crud-card-button edificio-crud-card-button-first">
+          EXCLUIR
+        </button>
+        <Link to={`/admin/edificios/${edificio.id}`}>
+          <button className="btn btn-outline-secondary edificio-crud-card-button">
+            EDITAR
+          </button>
+        </Link>
       </div>
     </div>
   );
