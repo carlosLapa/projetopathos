@@ -54,10 +54,11 @@ public class EdificioResource {
     @PostMapping
     public ResponseEntity<EdificioDTO> insert(@Valid @RequestBody EdificioDTO dto) {
         dto = edificioService.insert(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
-
+    
     @PutMapping(value = "/{id}")
     public ResponseEntity<EdificioDTO> update(@Valid @PathVariable Long id, @RequestBody EdificioDTO dto) {
         dto = edificioService.update(id, dto);

@@ -40,7 +40,7 @@ public class EdificioService {
 	
 	@Transactional(readOnly = true)
     public Page<EdificioDTO> findAllPaged(Long categoryId, String nome, Pageable pageable) {
-        List<Anomalia> categories = (categoryId == 0) ? null : Arrays.asList(anomaliaRepository.getOne(categoryId));
+        List<Anomalia> categories = (categoryId == 0) ? null : Arrays.asList(anomaliaRepository.getById(categoryId));
         Page<Edificio> page = edificioRepository.find(categories, nome, pageable);
         edificioRepository.findEdificiosWithAnomalias(page.getContent());
         return page.map(x -> new EdificioDTO(x, x.getAnomalias()));

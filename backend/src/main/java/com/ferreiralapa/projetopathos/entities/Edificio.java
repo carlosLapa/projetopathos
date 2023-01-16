@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -44,8 +46,11 @@ public class Edificio implements Serializable {
 	private Instant updatedAt;
 
 	/* Para aceder às anomalias associadas a cada edificio */
-	@ManyToMany(mappedBy = "edificios")
-	private Set<Anomalia> anomalias = new HashSet<>();
+	@ManyToMany
+	@JoinTable(name = "tb_edificio_anomalia",
+	    joinColumns = @JoinColumn(name = "edificio_id"),
+	    inverseJoinColumns = @JoinColumn(name = "anomalia_id"))
+	Set<Anomalia> anomalias = new HashSet<>();
 
 	public Edificio() {
 	}

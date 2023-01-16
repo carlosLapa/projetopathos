@@ -9,7 +9,7 @@ import { AuthContext } from 'AuthContext';
 
 import './styles.css';
 
-type FormData = {
+type CredentialsDTO = {
   username: string;
   password: string;
 };
@@ -40,7 +40,7 @@ const Login = () => {
   /* useState, para renderização condicional de erro de preenchimento */
 
   /* formState (desestruturado), para controlar o comportamento de validação do formulário. Como a função onde está implementado,
-   * o useForm já está parametrizado com a FormData e, portanto, ligado à variável "formData", este vai detetar erros de preenchimento no campo de
+   * o useForm está parametrizado com o type FormData (definido acima) e, portanto, ligado à variável "formData", que vai detetar erros de preenchimento no campo de
    * input apropriados para cada um desses atributos. Depois ainda podemos usar o atributo "message" para fazer display da mensagem que definimos
    * no "required"
    */
@@ -51,7 +51,7 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<CredentialsDTO>();
 
   /**  Função do react-router-dom - Permite que façamos redireccionamento e mudança de rota programaticamente
    * neste caso usamos o ".push" que acrescenta uma nova rota na pilha de rotas, que "desempilha" ao voltar às rotas
@@ -60,7 +60,7 @@ const Login = () => {
   */
   const history = useHistory();
 
-  const onSubmit = (formData: FormData) => {
+  const onSubmit = (formData: CredentialsDTO) => {
     requestBackendLogin(formData)
       .then((response) => {
         saveAuthData(response.data);

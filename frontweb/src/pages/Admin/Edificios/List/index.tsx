@@ -18,11 +18,12 @@ const List = () => {
       url: '/edificios',
       params: {
         page: 0,
-        size: 12,
+        size: 20,
       },
     };
 
-    requestBackend(config).then((response) => {
+    requestBackend(config)
+    .then((response) => {
       setPage(response.data);
     });
   }, []);
@@ -42,7 +43,7 @@ const List = () => {
         <div className="base-card edificio-filter-container">Search bar</div>
       </div>
       <div className="row">
-        {page?.content.map((edificio) => (
+        {page?.content.map(edificio => (
           <div key={edificio.id} className="col-sm-6 col-md-12">
             <EdificioCrudCard edificio={edificio} />
           </div>

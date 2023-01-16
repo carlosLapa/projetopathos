@@ -1,4 +1,4 @@
-import { Edificio } from './edificio';
+// import { Edificio } from "./edificio";
 
 export type Anomalia = {
   id: number;
@@ -6,5 +6,5 @@ export type Anomalia = {
   inconsequente: string;
   date: string;
   descricao: string;
-  edificios: Edificio[];
+  // edificios: Edificio[];
 };

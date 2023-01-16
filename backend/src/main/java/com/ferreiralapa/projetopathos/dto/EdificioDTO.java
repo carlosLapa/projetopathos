@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 
 import com.ferreiralapa.projetopathos.entities.Anomalia;
@@ -28,6 +29,7 @@ public class EdificioDTO implements Serializable {
 	private Instant date;
 	private Instant createdAt;
 
+	@NotEmpty(message = "Deve inserir as anomalias presentes no edifício!")
 	private List<AnomaliaDTO> anomalias = new ArrayList<>();
 
 	public EdificioDTO() {

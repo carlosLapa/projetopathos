@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +37,8 @@ public class AnomaliaService {
 	 */
 
 	@Transactional(readOnly = true)
-	public Page<AnomaliaDTO> findAllPaged(PageRequest pageRequest) {
-		Page<Anomalia> list = anomaliaRepository.findAll(pageRequest);
+	public Page<AnomaliaDTO> findAllPaged(Pageable pageable) {
+		Page<Anomalia> list = anomaliaRepository.findAll(pageable);
 		return list.map(x -> new AnomaliaDTO(x));
 	}
 
@@ -49,26 +49,48 @@ public class AnomaliaService {
 		return new AnomaliaDTO(entity, entity.getEdificios());
 	}
 
-	@Transactional
+//	@Transactional
+//	public AnomaliaDTO insert(AnomaliaDTO dto) {
+//		Anomalia entity = new Anomalia();
+//		copyDtoToEntity(dto, entity);
+//		entity = anomaliaRepository.save(entity);
+//		return new AnomaliaDTO(entity);
+//	}
+	
 	public AnomaliaDTO insert(AnomaliaDTO dto) {
-		Anomalia entity = new Anomalia();
-		copyDtoToEntity(dto, entity);
-		entity = anomaliaRepository.save(entity);
-		return new AnomaliaDTO(entity);
-	}
+	    Anomalia entity = new Anomalia();
+        entity.setDescricao(dto.getDescricao());
+        copyDtoToEntity(dto, entity);
+        entity = anomaliaRepository.save(entity);
+        return new AnomaliaDTO(entity);
+    }
 
+//	@Transactional
+//	public AnomaliaDTO update(Long id, AnomaliaDTO dto) {
+//		try {
+//			Anomalia entity = anomaliaRepository.getById(id);
+//			copyDtoToEntity(dto, entity);
+//			entity = anomaliaRepository.save(entity);
+//			return new AnomaliaDTO(entity);
+//		} catch (EntityNotFoundException e) {
+//			throw new ResourceNotFoundException("id não encontrado! " + id + "");
+//		}
+//
+//	}
+	
 	@Transactional
-	public AnomaliaDTO update(Long id, AnomaliaDTO dto) {
-		try {
-			Anomalia entity = anomaliaRepository.getById(id);
-			copyDtoToEntity(dto, entity);
-			entity = anomaliaRepository.save(entity);
-			return new AnomaliaDTO(entity);
-		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("id não encontrado! " + id + "");
-		}
-
-	}
+    public AnomaliaDTO update(Long id, AnomaliaDTO dto) {
+        try {
+            Anomalia entity = anomaliaRepository.getById(id);
+            entity.setDescricao(dto.getDescricao());
+            copyDtoToEntity(dto, entity);
+            entity = anomaliaRepository.save(entity);
+            return new AnomaliaDTO(entity);
+        }
+        catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not found " + id);
+        }       
+    }
 
 	public void delete(Long id) {
 		try {
