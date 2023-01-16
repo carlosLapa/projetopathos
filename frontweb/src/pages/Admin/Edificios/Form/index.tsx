@@ -21,9 +21,16 @@ const Form = () => {
 
   const onSubmit = (formData: Edificio) => {
     /**
-     * Sendo obrigatório passar pelo menos uma anomalia em cada Edificio, temos que criar esta função com uma anomalia mock 
+     * Sendo obrigatório passar pelo menos uma anomalia em cada Edificio, temos que criar esta função com uma anomalia mock
      */
-    const data = { ...formData, anomalias: [ { id: 1, consequente: '', inconsequente: '', date: '', descricao: '' } ] };
+    const data = {
+      ...formData,
+      imgUrl:
+        'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg',
+      anomalias: [
+        { id: 1, consequente: '', inconsequente: '', date: '', descricao: '' },
+      ],
+    };
 
     const config: AxiosRequestConfig = {
       method: 'POST',
