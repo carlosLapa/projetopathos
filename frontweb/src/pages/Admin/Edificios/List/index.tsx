@@ -9,28 +9,34 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 
 const List = () => {
-
   const [page, setPage] = useState<SpringPage<Edificio>>();
 
   useEffect(() => {
+    getEdificios();
+  }, []);
+
+  const getEdificios = () => {
     const config: AxiosRequestConfig = {
       method: 'GET',
       url: '/edificios',
       params: {
         page: 0,
-        size: 50,
+        size: 20,
       },
     };
 
-    requestBackend(config)
-    .then((response) => {
+    requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  }, []);
+  };
 
   /**
    * No Link abaixo (do botão adicionar/criar, no form temos que diferenciar entre a rota para criar e para editar)
    * A palavra "create" casa com a rota :/edificioId, temos somente que diferenciar posteriormente
+   */
+
+  /**
+   * Padrão de projetos Observer - a função onDelete()
    */
   return (
     <div className="edificio-crud-container">
@@ -43,9 +49,12 @@ const List = () => {
         <div className="base-card edificio-filter-container">Search bar</div>
       </div>
       <div className="row">
-        {page?.content.map(edificio => (
+        {page?.content.map((edificio) => (
           <div key={edificio.id} className="col-sm-6 col-md-12">
-            <EdificioCrudCard edificio={edificio} />
+            <EdificioCrudCard
+              edificio={edificio}
+              onDelete={() => getEdificios()}
+            />
           </div>
         ))}
       </div>
