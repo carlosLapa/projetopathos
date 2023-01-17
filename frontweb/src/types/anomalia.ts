@@ -5,6 +5,7 @@ export type Anomalia = {
   consequente: string;
   inconsequente: string;
   date: string;
+  tipologia: string;
   descricao: string;
   // edificios: Edificio[];
 };

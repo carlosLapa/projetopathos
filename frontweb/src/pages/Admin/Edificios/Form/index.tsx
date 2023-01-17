@@ -28,7 +28,7 @@ const Form = () => {
       imgUrl:
         'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg',
       anomalias: [
-        { id: 1, consequente: '', inconsequente: '', date: '', descricao: '' },
+        { id: 1, consequente: '', inconsequente: '', date: '', tipologia: '', descricao: '' },
       ],
     };
 
