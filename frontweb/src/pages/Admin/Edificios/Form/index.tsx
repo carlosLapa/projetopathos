@@ -2,6 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
+import Select from 'react-select';
 import { Edificio } from 'types/edificio';
 import { requestBackend } from 'util/requests';
 
@@ -13,6 +14,13 @@ type UrlParams = {
 };
 
 const Form = () => {
+
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
   /**
    * O tipo customizado, Edificio, e os seus atributos, é o que controla este formulário, que neste caso servirá para POST
    */
@@ -79,10 +87,10 @@ const Form = () => {
             },
           ],
     };
-/**
- * Mesma coisa que fizemos acima, vamos avaliar se estamos a editar (PUT) ou a criar (POST)
- * e qual o url que precisamos utilizar
- */
+    /**
+     * Mesma coisa que fizemos acima, vamos avaliar se estamos a editar (PUT) ou a criar (POST)
+     * e qual o url que precisamos utilizar
+     */
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/edificios/${edificioId}` : '/edificios',
@@ -122,6 +130,17 @@ const Form = () => {
                 <div className="invalid-feedback d-block">
                   {errors.nome?.message}
                 </div>
+              </div>
+
+              <div className="margin-bottom-30">
+                  <Select 
+                    options={options}
+                    classNamePrefix="edificio-crud-select"
+                    isMulti
+
+                  />
+
+
               </div>
 
               <div className="margin-bottom-30">

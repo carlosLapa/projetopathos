@@ -10,6 +10,10 @@
   margin-bottom: 30px;
 }
 
+.form-control {
+  background-color: #fff;
+}
+
 .margin-bottom-30 {
   margin-bottom: 30px;
 }
@@ -32,6 +36,19 @@
   border-radius: 10px;
   width: 110px;
   font-weight: bold;
+}
+
+.edificio-crud-select__control {
+  height: 50px;
+  border-radius: 10px !important;
+  font-size: 1.2em;
+  letter-spacing: -0.015em;
+  color: #263238;
+  height: 50px;
+}
+
+.edificio-crud-select__placeholder {
+  color: #9e9e9e !important;
 }
 
 @media (min-width: 576px) {
