@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import { Anomalia } from 'types/anomalia';
@@ -40,6 +40,7 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    control,
   } = useForm<Edificio>();
 
   useEffect(() => {
@@ -140,13 +141,30 @@ const Form = () => {
               </div>
 
               <div className="margin-bottom-30">
-                <Select
-                  options={selectAnomalias}
-                  classNamePrefix="edificio-crud-select"
-                  isMulti
-                  getOptionLabel={(anomalia: Anomalia) => anomalia.tipologia}
-                  getOptionValue={(anomalia: Anomalia) => String(anomalia.id)}
+                <Controller
+                  name="anomalias"
+                  rules={{ required: true }}
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      options={selectAnomalias}
+                      classNamePrefix="edificio-crud-select"
+                      isMulti
+                      getOptionLabel={(anomalia: Anomalia) =>
+                        anomalia.tipologia
+                      }
+                      getOptionValue={(anomalia: Anomalia) =>
+                        String(anomalia.id)
+                      }
+                    />
+                  )}
                 />
+                {errors.anomalias && (
+                  <div className="invalid-feedback d-block">
+                    Campo obrigatório
+                  </div>
+                )}
               </div>
 
               <div className="margin-bottom-30">
