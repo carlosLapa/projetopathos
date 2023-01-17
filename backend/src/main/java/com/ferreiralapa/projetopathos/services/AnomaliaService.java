@@ -106,6 +106,7 @@ public class AnomaliaService {
 	private void copyDtoToEntity(AnomaliaDTO dto, Anomalia entity) {
 		entity.setConsequente(dto.getConsequente());
 		entity.setInconsequente(dto.getInconsequente());
+		entity.setTipologia(dto.getTipologia());
 		entity.setDescricao(dto.getDescricao());
 		entity.setDate(dto.getDate());
 		/*

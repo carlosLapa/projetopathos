@@ -30,6 +30,9 @@ public class Anomalia implements Serializable {
 	// Aqui talvez faça mais sentido ser um boolean - pois teve consequencia ou nao
 	private String consequente;
 	private String inconsequente;
+	
+	@Column(columnDefinition = "TEXT")
+    private String tipologia;
 
 	@Column(columnDefinition = "TEXT")
 	private String descricao;
@@ -61,11 +64,12 @@ public class Anomalia implements Serializable {
 	public Anomalia() {
 	}
 
-	public Anomalia(String consequente, String inconsequente, Instant date, String descricao) {
+	public Anomalia(String consequente, String inconsequente, Instant date, String tipologia, String descricao) {
 		super();
 		this.consequente = consequente;
 		this.inconsequente = inconsequente;
 		this.date = date;
+		this.tipologia = tipologia;
 		this.descricao = descricao;
 	}
 
@@ -101,7 +105,15 @@ public class Anomalia implements Serializable {
 		this.date = date;
 	}
 
-	public String getDescricao() {
+	public String getTipologia() {
+        return tipologia;
+    }
+
+    public void setTipologia(String tipologia) {
+        this.tipologia = tipologia;
+    }
+
+    public String getDescricao() {
 		return descricao;
 	}
 

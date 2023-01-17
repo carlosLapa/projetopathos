@@ -15,15 +15,14 @@ INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, 
 INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, img_url, date, created_At) VALUES ('Braga', 'Prédio', 'Edificio da Floresta', 'Habitação', 'Moderna', 11, '2F', 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z', NOW());
 INSERT INTO tb_edificio (localizacao, tipologia, nome, utilizacao, arquitetura, piso, fracao, img_url, date, created_At) VALUES ('Faro', 'Prédio', 'Edificio do Metal', 'Habitação', 'Moderna', 2, '7G', 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z', NOW());
 
-INSERT INTO tb_anomalia (consequente, inconsequente, descricao, date) VALUES ('Sim', 'Não', 'Causou patologias', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
-INSERT INTO tb_anomalia (consequente, inconsequente, descricao, date) VALUES ('Não', 'Sim', 'Não causou patologias', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
+INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, date) VALUES ('Sim', 'Não', 'Estrutural', 'Causou patologias', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
+INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, date) VALUES ('Não', 'Sim', 'Material', 'Não causou patologias', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
 
 INSERT INTO tb_causa (tipologia, descricao) VALUES ('Estrutural', 'Fissura no pilar');
 INSERT INTO tb_causa (tipologia, descricao) VALUES ('Térmica', 'Falta de isolamento');
 
 INSERT INTO tb_edificio_anomalia (edificio_id, anomalia_id) VALUES (1, 1);
 INSERT INTO tb_edificio_anomalia (edificio_id, anomalia_id) VALUES (1, 2);
-INSERT INTO tb_edificio_anomalia (edificio_id, anomalia_id) VALUES (2, 2);
 INSERT INTO tb_edificio_anomalia (edificio_id, anomalia_id) VALUES (2, 2);
 INSERT INTO tb_edificio_anomalia (edificio_id, anomalia_id) VALUES (3, 2);
 INSERT INTO tb_edificio_anomalia (edificio_id, anomalia_id) VALUES (4, 2);
