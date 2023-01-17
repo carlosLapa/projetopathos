@@ -52,7 +52,7 @@ const EdificioCrudCard = ({ edificio, onDelete }: Props) => {
         </div>
         <div className="edificio-crud-anomalia-container">
           {edificio.anomalias.map((anomalia) => (
-            <AnomaliaBadge descricao={anomalia.descricao} key={anomalia.id} />
+            <AnomaliaBadge tipologia={anomalia.tipologia} key={anomalia.id} />
           ))}
         </div>
       </div>

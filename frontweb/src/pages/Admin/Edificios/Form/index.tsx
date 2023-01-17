@@ -1,8 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
+import { Anomalia } from 'types/anomalia';
 import { Edificio } from 'types/edificio';
 import { requestBackend } from 'util/requests';
 
@@ -14,13 +15,6 @@ type UrlParams = {
 };
 
 const Form = () => {
-
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
-
   /**
    * O tipo customizado, Edificio, e os seus atributos, é o que controla este formulário, que neste caso servirá para POST
    */
@@ -32,6 +26,13 @@ const Form = () => {
   const history = useHistory();
 
   /**
+   * useState para a seleção das anomalias, do tipo Anomalia, que inicialmente, por padrão, estará vazia e que vamos utilizar na lista de options
+   * do Select.
+   * No caso do setSelectAnomalias, já teremos que usar um useEffect para buscar as anomalias do BE, aquando o componente for montado.
+   */
+  const [selectAnomalias, setSelectAnomalias] = useState<Anomalia[]>([]);
+
+  /**
    * o setValue permite definir o(s) valor(es) de algum(/ns) atributo(s)
    */
   const {
@@ -40,6 +41,12 @@ const Form = () => {
     formState: { errors },
     setValue,
   } = useForm<Edificio>();
+
+  useEffect(() => {
+    requestBackend({ url: '/anomalias' }).then((response) => {
+      setSelectAnomalias(response.data.content);
+    });
+  }, []);
 
   /**
    * Para editar e trazer os atributos respectivos e preenchidos, utilizamos este useEffect,
@@ -133,14 +140,13 @@ const Form = () => {
               </div>
 
               <div className="margin-bottom-30">
-                  <Select 
-                    options={options}
-                    classNamePrefix="edificio-crud-select"
-                    isMulti
-
-                  />
-
-
+                <Select
+                  options={selectAnomalias}
+                  classNamePrefix="edificio-crud-select"
+                  isMulti
+                  getOptionLabel={(anomalia: Anomalia) => anomalia.tipologia}
+                  getOptionValue={(anomalia: Anomalia) => String(anomalia.id)}
+                />
               </div>
 
               <div className="margin-bottom-30">

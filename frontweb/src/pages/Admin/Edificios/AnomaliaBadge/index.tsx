@@ -1,11 +1,11 @@
 import './styles.css';
 
 type Props = {
-  descricao: string;
+  tipologia: string;
 };
 
-const AnomaliaBadge = ({ descricao }: Props) => {
-  return <div className="category-badge-container">{descricao}</div>;
+const AnomaliaBadge = ({ tipologia }: Props) => {
+  return <div className="category-badge-container">{tipologia}</div>;
 };
 
 export default AnomaliaBadge;
