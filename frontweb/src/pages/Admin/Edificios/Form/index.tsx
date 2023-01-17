@@ -77,32 +77,15 @@ const Form = () => {
      * No caso da edição, não vamos permitir que estes atributos sejam hardcoded.
      * Para tal fazemos uma condição ternária para avaliar a situação em que estamos.
      */
-    const data = {
-      ...formData,
-      imgUrl: isEditing
-        ? formData.imgUrl
-        : 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg',
-      anomalias: isEditing
-        ? formData.anomalias
-        : [
-            {
-              id: 1,
-              consequente: '',
-              inconsequente: '',
-              date: '',
-              tipologia: '',
-              descricao: '',
-            },
-          ],
-    };
+
     /**
-     * Mesma coisa que fizemos acima, vamos avaliar se estamos a editar (PUT) ou a criar (POST)
+     * Vamos avaliar se estamos a editar (PUT) ou a criar (POST)
      * e qual o url que precisamos utilizar
      */
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/edificios/${edificioId}` : '/edificios',
-      data,
+      data: formData,
       withCredentials: true,
     };
 
@@ -200,11 +183,33 @@ const Form = () => {
                   {errors.tipologia?.message}
                 </div>
               </div>
+
+              <div className="margin-bottom-30">
+                <input
+                  {...register('imgUrl', {
+                    required: 'Campo obrigatório',
+                    pattern: {
+                      value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm,
+                      message: 'Deve ser um URL válido',
+                    },
+                  })}
+                  type="text"
+                  className={`form-control base-input ${
+                    errors.nome ? 'is-invalid' : ''
+                  }`}
+                  placeholder="URL da imagem do edifício"
+                  name="imgUrl"
+                />
+                <div className="invalid-feedback d-block">
+                  {errors.imgUrl?.message}
+                </div>
+              </div>
             </div>
+
             <div className="col-lg-6">
               <div>
                 <textarea
-                  rows={10}
+                  rows={12}
                   {...register('utilizacao', {
                     required: 'Campo obrigatório',
                   })}
@@ -220,6 +225,7 @@ const Form = () => {
               </div>
             </div>
           </div>
+
           <div className="edificio-crud-buttons-container">
             <button
               className="btn btn-outline-danger edificio-crud-button"
