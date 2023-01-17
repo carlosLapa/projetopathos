@@ -15,7 +15,9 @@ type UrlParams = {
 
 const EdificioDetails = () => {
   /*Objeto desestruturado - para funcionar, temos q declará-lo através de um "type" antes de o utilizar 
-    Agora podemos capturar, (no axios.get) os parametros URL que forem passados
+    Agora podemos capturar, (no axios.get) os parametros URL que forem passados. 
+    Neste caso, vamos capturar o edificioId (declarado no type UrlParams acima)
+    Nota: Podem ser vários parametros.
   */
   const { edificioId } = useParams<UrlParams>();
 
