@@ -37,14 +37,14 @@ const Catalogo = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const getEdificios = (pageNumber: number) => {
     const params: AxiosRequestConfig = {
       method: 'GET',
-      url: "/edificios",
+      url: '/edificios',
       params: {
-        page: 0,
+        page: pageNumber,
         size: 12,
-      }
+      },
     };
 
     setIsLoading(true);
@@ -55,6 +55,10 @@ const Catalogo = () => {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    getEdificios(0);
   }, []);
 
   /* Renderizar dinamicamente os cards do edificio
@@ -78,7 +82,9 @@ Aplicamos uma renderização condicional ternária para renderizar a página de 
       </div>
 
       <div className="row">
-        {isLoading ? <CardLoader /> : (
+        {isLoading ? (
+          <CardLoader />
+        ) : (
           page?.content.map((edificio) => {
             return (
               <div className="col-sm-6 col-lg-4 col-xl-6" key={edificio.id}>
@@ -87,11 +93,16 @@ Aplicamos uma renderização condicional ternária para renderizar a página de 
                 </Link>
               </div>
             );
-          }))}
+          })
+        )}
       </div>
 
       <div className="row">
-        <Pagination />
+        <Pagination
+          pageCount={page ? page.totalElements : 0}
+          range={3}
+          onChange={getEdificios}
+        />
       </div>
     </div>
   );

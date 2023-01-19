@@ -13,16 +13,22 @@ const List = () => {
   const [page, setPage] = useState<SpringPage<Edificio>>();
 
   useEffect(() => {
-    getEdificios();
+    getEdificios(0);
   }, []);
 
-  const getEdificios = () => {
+  /**
+   * Na requisição, o getEdificios recebe a página do BE, ao fazer o Get, e passa como parâmetro o numero de página.
+   * Permitirá disparar o evento onChange na mudança de página.
+   * No useEffect, disparado aquando o render da página, o getEdificios já fornece então a página
+   * 
+   */
+  const getEdificios = (pageNumber: number) => {
     const config: AxiosRequestConfig = {
       method: 'GET',
       url: '/edificios',
       params: {
-        page: 0,
-        size: 20,
+        page: pageNumber,
+        size: 2,
       },
     };
 
@@ -54,14 +60,24 @@ const List = () => {
           <div key={edificio.id} className="col-sm-6 col-md-12">
             <EdificioCrudCard
               edificio={edificio}
-              onDelete={() => getEdificios()}
+              onDelete={() => getEdificios(page.number)}
             />
           </div>
         ))}
       </div>
-      <Pagination />
+      <Pagination
+        pageCount={page ? page.totalElements : 0}
+        range={3}
+        onChange={getEdificios}
+      />
     </div>
   );
 };
+
+/**
+ * no onChange, dentro do Pagination acima, estamos "apenas" a passar a referência da funação getEdificios,
+ * pois recebe um número e não retorna nada, contemplando a assinatura da função definida no Props no componente Pagination
+ * e na sua configuração, no Pagination, já foi chamada passando o argumento e, assim, só precisamos agora de passar a referência da mesma.
+ */
 
 export default List;
