@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import Pagination from 'components/Pagination';
 import EdificioCrudCard from 'pages/Admin/Edificios/EdificioCrudCard';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Edificio } from 'types/edificio';
 import { SpringPage } from 'types/vendor/spring';
@@ -9,25 +9,48 @@ import { requestBackend } from 'util/requests';
 
 import './styles.css';
 
+/**
+ * É necessário criar 2 componentes (filhos - filtro e paginação) de controlo nesta página, a parte da paginação e a parte dos filtros
+ * para por sua vez controlarem a listagem e o que consta na mesma.
+ * Para facilitar a comunicação entre estes 3 componentes, procedemos a uma refatoração antes de aplicar os filtros
+ * Assim, vamos querer manter um novo estado, para guardar os dados desses componentes que controlam a listagem.
+ * Então criámos o type abaixo - dados dos componentes de controlo. Que vem tanto do componente Pagination e do
+ *
+ * Depois criámos o useState que mantem o estado dos dados de todos os componentes q fazem algum controlo da listagem.
+ * Quando disparar o evento onChange do Pagination,ao invés de chamar o Pagination, que por sua vez chamaria o getEdificio,
+ * chama antes um numero referente à pagina ativa (q vem do estado original), através da função handlePageChange.
+ */
+
+type ControlComponentsData = {
+  activePage: number;
+};
+
 const List = () => {
   const [page, setPage] = useState<SpringPage<Edificio>>();
 
-  useEffect(() => {
-    getEdificios(0);
-  }, []);
+  const [controlComponentsData, setControlComponentsData] =
+    useState<ControlComponentsData>({
+      activePage: 0,
+    });
+
+  const handlePageChange = (pageNumber: number) => {
+    setControlComponentsData({ activePage: pageNumber });
+  };
 
   /**
    * Na requisição, o getEdificios recebe a página do BE, ao fazer o Get, e passa como parâmetro o numero de página.
    * Permitirá disparar o evento onChange na mudança de página.
-   * No useEffect, disparado aquando o render da página, o getEdificios já fornece então a página
-   * 
+   * No useEffect, disparado aquando o render da página, o getEdificios já fornece então a página.
+   *
+   * Para evitar loop infinito, temos que usar o hook useCallback, que guarda e verifica se a referencia nas dependencias for a mesma,
+   * não roda novamente
    */
-  const getEdificios = (pageNumber: number) => {
+  const getEdificios = useCallback(() => {
     const config: AxiosRequestConfig = {
       method: 'GET',
       url: '/edificios',
       params: {
-        page: pageNumber,
+        page: controlComponentsData.activePage,
         size: 2,
       },
     };
@@ -35,7 +58,16 @@ const List = () => {
     requestBackend(config).then((response) => {
       setPage(response.data);
     });
-  };
+  }, [controlComponentsData]);
+
+  /**
+   * o método para requisição ao BE, passou para este useEffect, pois quando o componente é montado, a lógica de requisição é executada
+   * e busca a página 0 por padrão e salva-a para o estado do componente (setPage) e tem a dependência que observa quando ocorrem mudanças
+   * no activePage (acima) e efetua o refresh
+   */
+  useEffect(() => {
+    getEdificios();
+  }, [getEdificios]);
 
   /**
    * No Link abaixo (do botão adicionar/criar, no form temos que diferenciar entre a rota para criar e para editar)
@@ -58,17 +90,14 @@ const List = () => {
       <div className="row">
         {page?.content.map((edificio) => (
           <div key={edificio.id} className="col-sm-6 col-md-12">
-            <EdificioCrudCard
-              edificio={edificio}
-              onDelete={() => getEdificios(page.number)}
-            />
+            <EdificioCrudCard edificio={edificio} onDelete={getEdificios} />
           </div>
         ))}
       </div>
       <Pagination
         pageCount={page ? page.totalElements : 0}
         range={3}
-        onChange={getEdificios}
+        onChange={handlePageChange}
       />
     </div>
   );
