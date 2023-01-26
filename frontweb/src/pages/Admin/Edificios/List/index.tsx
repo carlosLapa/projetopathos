@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import EdificioFilter from 'components/EdificioFilter';
 import Pagination from 'components/Pagination';
 import EdificioCrudCard from 'pages/Admin/Edificios/EdificioCrudCard';
 import { useCallback, useEffect, useState } from 'react';
@@ -42,8 +43,8 @@ const List = () => {
    * Permitirá disparar o evento onChange na mudança de página.
    * No useEffect, disparado aquando o render da página, o getEdificios já fornece então a página.
    *
-   * Para evitar loop infinito, temos que usar o hook useCallback, que guarda e verifica se a referencia nas dependencias for a mesma,
-   * não roda novamente
+   * Para evitar loop infinito, temos que usar o hook useCallback, que guarda e verifica se a referencia nas dependencias é a mesma,
+   * caso seja, não roda novamente
    */
   const getEdificios = useCallback(() => {
     const config: AxiosRequestConfig = {
@@ -61,8 +62,8 @@ const List = () => {
   }, [controlComponentsData]);
 
   /**
-   * o método para requisição ao BE, passou para este useEffect, pois quando o componente é montado, a lógica de requisição é executada
-   * e busca a página 0 por padrão e salva-a para o estado do componente (setPage) e tem a dependência que observa quando ocorrem mudanças
+   * o método para requisição ao BE, passou também para este useEffect, pois quando o componente é montado, a lógica de requisição é executada
+   * e busca a página 0 por padrão, salva-a para o estado do componente (setPage) e tem a dependência que "observa" quando ocorrem mudanças
    * no activePage (acima) e efetua o refresh
    */
   useEffect(() => {
@@ -85,7 +86,7 @@ const List = () => {
             ADICIONAR / CRIAR
           </button>
         </Link>
-        <div className="base-card edificio-filter-container">Search bar</div>
+        <EdificioFilter />
       </div>
       <div className="row">
         {page?.content.map((edificio) => (

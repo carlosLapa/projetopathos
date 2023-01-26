@@ -13,11 +13,6 @@
   margin-bottom: 20px;
 }
 
-.edificio-filter-container {
-  margin-bottom: 20px;
-  padding: 15px;
-}
-
 @media (min-width: 768px) {
   .edificio-crud-bar-container {
     display: flex;
