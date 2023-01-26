@@ -13,14 +13,9 @@ type EdificioFilterData = {
 };
 
 const EdificioFilter = () => {
-
   const [selectAnomalias, setSelectAnomalias] = useState<Anomalia[]>([]);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-  } = useForm<EdificioFilterData>();
+  const { register, handleSubmit, control } = useForm<EdificioFilterData>();
 
   const onSubmit = (formData: EdificioFilterData) => {
     console.log('ENVIOU', formData);
@@ -40,10 +35,10 @@ const EdificioFilter = () => {
             {...register('name')}
             type="text"
             className="form-control base-input"
-            placeholder="Nome/designação do edifício"
+            placeholder="Designação do edifício"
             name="name"
           />
-          <button>
+          <button className="edificio-filter-search-icon">
             <SearchIcon />
           </button>
         </div>
@@ -57,14 +52,17 @@ const EdificioFilter = () => {
                   {...field}
                   options={selectAnomalias}
                   isClearable
-                  classNamePrefix="edificio-crud-select"
+                  placeholder="Anomalia"
+                  classNamePrefix="edificio-filter-select"
                   getOptionLabel={(anomalia: Anomalia) => anomalia.tipologia}
                   getOptionValue={(anomalia: Anomalia) => String(anomalia.id)}
                 />
               )}
             />
           </div>
-          <button className="btn btn-outline-secondary">LIMPAR</button>
+          <button className="btn btn-outline-secondary btn-edificio-filter-clear">
+            LIMPAR <span className="btn-edificio-filter-word">FILTRO</span>
+          </button>
         </div>
       </form>
     </div>
