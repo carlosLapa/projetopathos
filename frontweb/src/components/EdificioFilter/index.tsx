@@ -1,24 +1,68 @@
 import { ReactComponent as SearchIcon } from 'assets/images/search-icon.svg';
+import { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import Select from 'react-select';
+import { Anomalia } from 'types/anomalia';
+import { requestBackend } from 'util/requests';
 
 import './styles.css';
 
+type EdificioFilterData = {
+  name: string;
+  anomalia: Anomalia;
+};
+
 const EdificioFilter = () => {
+
+  const [selectAnomalias, setSelectAnomalias] = useState<Anomalia[]>([]);
+
+  const {
+    register,
+    handleSubmit,
+    control,
+  } = useForm<EdificioFilterData>();
+
+  const onSubmit = (formData: EdificioFilterData) => {
+    console.log('ENVIOU', formData);
+  };
+
+  useEffect(() => {
+    requestBackend({ url: '/anomalias' }).then((response) => {
+      setSelectAnomalias(response.data.content);
+    });
+  }, []);
+
   return (
     <div className="base-card edificio-filter-container">
-      <form action="" className="edificio-filter-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="edificio-filter-form">
         <div className="edificio-filter-name-container">
           <input
+            {...register('name')}
             type="text"
-            className="form-control"
-            placeholder="Nome do edifício"
+            className="form-control base-input"
+            placeholder="Nome/designação do edifício"
+            name="name"
           />
-          <SearchIcon />
+          <button>
+            <SearchIcon />
+          </button>
         </div>
         <div className="edificio-filter-bottom-container">
           <div className="edificio-filter-anomalia-container">
-            <select name="" id="">
-              <option value="">Livros</option>
-            </select>
+            <Controller
+              name="anomalia"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  options={selectAnomalias}
+                  isClearable
+                  classNamePrefix="edificio-crud-select"
+                  getOptionLabel={(anomalia: Anomalia) => anomalia.tipologia}
+                  getOptionValue={(anomalia: Anomalia) => String(anomalia.id)}
+                />
+              )}
+            />
           </div>
           <button className="btn btn-outline-secondary">LIMPAR</button>
         </div>
