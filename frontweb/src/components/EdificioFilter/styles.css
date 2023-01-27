@@ -55,6 +55,7 @@
 
 .edificio-filter-select__placeholder {
   color: #9e9e9e !important;
+  margin-bottom: 10px;
 }
 
 .edificio-filter-select__indicator-separator {
