@@ -71,10 +71,10 @@ const EdificioDetails = () => {
             ) : (
               <>
                 <div className="img-container">
-                  <img src={edificio?.imgUrl} alt={edificio?.nome} />
+                  <img src={edificio?.imgUrl} alt={edificio?.name} />
                 </div>
                 <div className="name-typology-container">
-                  <h1>{edificio?.nome}</h1>
+                  <h1>{edificio?.name}</h1>
                   <h3>{edificio?.tipologia}</h3>
                 </div>
               </>

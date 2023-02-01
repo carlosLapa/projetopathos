@@ -36,7 +36,7 @@ const List = () => {
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
       activePage: 0,
-      filterData: { nome: '', anomalia: null },
+      filterData: { name: '', anomalia: null },
     });
 
   const handlePageChange = (pageNumber: number) => {
@@ -71,7 +71,7 @@ const List = () => {
       params: {
         page: controlComponentsData.activePage,
         size: 3,
-        name: controlComponentsData.filterData.nome,
+        name: controlComponentsData.filterData.name,
         anomaliaId: controlComponentsData.filterData.anomalia?.id,
       },
     };

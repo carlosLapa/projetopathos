@@ -38,10 +38,10 @@ public class EdificioResource {
     @GetMapping
     public ResponseEntity<Page<EdificioDTO>> findAll(
             @RequestParam(value = "anomaliaId", defaultValue = "0") Long anomaliaId,
-            @RequestParam(value = "nome", defaultValue = "") String nome,
+            @RequestParam(value = "name", defaultValue = "") String name,
             Pageable pageable) {
 
-        Page<EdificioDTO> list = edificioService.findAllPaged(anomaliaId, nome.trim(), pageable);
+        Page<EdificioDTO> list = edificioService.findAllPaged(anomaliaId, name.trim(), pageable);
         return ResponseEntity.ok().body(list);
     }
 

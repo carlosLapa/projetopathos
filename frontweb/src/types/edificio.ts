@@ -4,7 +4,7 @@ export type Edificio = {
   id: number;
   localizacao: string;
   tipologia: string;
-  nome: string;
+  name: string;
   utilizacao: string;
   arquitetura: string;
   piso: number;

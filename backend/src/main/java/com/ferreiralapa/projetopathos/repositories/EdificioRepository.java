@@ -16,8 +16,8 @@ public interface EdificioRepository extends JpaRepository<Edificio, Long> {
     
     @Query("SELECT DISTINCT obj FROM Edificio obj INNER JOIN obj.anomalias anoms WHERE "
             + "(COALESCE(:anomalias) IS NULL OR anoms IN :anomalias) AND "
-            + "(LOWER(obj.nome) LIKE LOWER(CONCAT('%',:nome,'%'))) ")
-    Page<Edificio> find(List<Anomalia> anomalias, String nome, Pageable pageable);
+            + "(LOWER(obj.name) LIKE LOWER(CONCAT('%',:name,'%'))) ")
+    Page<Edificio> find(List<Anomalia> anomalias, String name, Pageable pageable);
     
     @Query("SELECT obj FROM Edificio obj JOIN FETCH obj.anomalias WHERE obj IN :edificios")
     List<Edificio> findEdificiosWithAnomalias(List<Edificio> edificios);

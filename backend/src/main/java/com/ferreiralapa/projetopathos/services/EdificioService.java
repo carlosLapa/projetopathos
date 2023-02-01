@@ -39,9 +39,9 @@ public class EdificioService {
 	 */
 	
 	@Transactional(readOnly = true)
-    public Page<EdificioDTO> findAllPaged(Long categoryId, String nome, Pageable pageable) {
+    public Page<EdificioDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
         List<Anomalia> categories = (categoryId == 0) ? null : Arrays.asList(anomaliaRepository.getById(categoryId));
-        Page<Edificio> page = edificioRepository.find(categories, nome, pageable);
+        Page<Edificio> page = edificioRepository.find(categories, name, pageable);
         edificioRepository.findEdificiosWithAnomalias(page.getContent());
         return page.map(x -> new EdificioDTO(x, x.getAnomalias()));
     }
@@ -88,7 +88,7 @@ public class EdificioService {
 	private void copyDtoToEntity(EdificioDTO dto, Edificio entity) {
 		entity.setLocalizacao(dto.getLocalizacao());
 		entity.setTipologia(dto.getTipologia());
-		entity.setNome(dto.getNome());
+		entity.setName(dto.getName());
 		entity.setUtilizacao(dto.getUtilizacao());
 		entity.setArquitetura(dto.getArquitetura());
 		entity.setPiso(dto.getPiso());

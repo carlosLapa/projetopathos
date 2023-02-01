@@ -60,7 +60,7 @@ const Form = () => {
     if (isEditing) {
       requestBackend({ url: `/edificios/${edificioId}` }).then((response) => {
         const edificio = response.data as Edificio;
-        setValue('nome', edificio.nome);
+        setValue('name', edificio.name);
         setValue('localizacao', edificio.localizacao);
         setValue('tipologia', edificio.tipologia);
         setValue('utilizacao', edificio.utilizacao);
@@ -108,18 +108,18 @@ const Form = () => {
             <div className="col-lg-6 edificio-crud-inputs-left-container">
               <div className="margin-bottom-30">
                 <input
-                  {...register('nome', {
+                  {...register('name', {
                     required: 'Campo obrigatório',
                   })}
                   type="text"
                   className={`form-control base-input ${
-                    errors.nome ? 'is-invalid' : ''
+                    errors.name ? 'is-invalid' : ''
                   }`}
                   placeholder="Nome/designação do edifício"
                   name="nome"
                 />
                 <div className="invalid-feedback d-block">
-                  {errors.nome?.message}
+                  {errors.name?.message}
                 </div>
               </div>
 
@@ -195,7 +195,7 @@ const Form = () => {
                   })}
                   type="text"
                   className={`form-control base-input ${
-                    errors.nome ? 'is-invalid' : ''
+                    errors.name ? 'is-invalid' : ''
                   }`}
                   placeholder="URL da imagem do edifício"
                   name="imgUrl"

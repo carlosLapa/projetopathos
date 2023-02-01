@@ -8,7 +8,7 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 
 export type EdificioFilterData = {
-  nome: string;
+  name: string;
   anomalia: Anomalia | null;
 };
 
@@ -27,7 +27,7 @@ const ProductFilter = ({ onSubmitFilter }: Props) => {
   };
 
   const handleFormClear = () => {
-    setValue('nome', '');
+    setValue('name', '');
     setValue('anomalia', null);
   };
 
@@ -35,7 +35,7 @@ const ProductFilter = ({ onSubmitFilter }: Props) => {
     setValue('anomalia', value);
 
     const obj: EdificioFilterData = {
-      nome: getValues('nome'),
+      name: getValues('name'),
       anomalia: getValues('anomalia'),
     };
 
@@ -53,11 +53,11 @@ const ProductFilter = ({ onSubmitFilter }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)} className="edificio-filter-form">
         <div className="edificio-filter-name-container">
           <input
-            {...register('nome')}
+            {...register('name')}
             type="text"
             className="form-control"
             placeholder="Nome do edifício"
-            name="nome"
+            name="name"
           />
           <button className="edificio-filter-search-icon">
             <SearchIcon />

@@ -43,11 +43,11 @@ const EdificioCrudCard = ({ edificio, onDelete }: Props) => {
   return (
     <div className="base-card edificio-crud-card">
       <div className="edificio-crud-card-top-container">
-        <img src={edificio.imgUrl} alt={edificio.nome} />
+        <img src={edificio.imgUrl} alt={edificio.name} />
       </div>
       <div className="edificio-crud-card-description">
         <div className="edificio-crud-card-bottom-container">
-          <h6>{edificio.nome}</h6>
+          <h6>{edificio.name}</h6>
           <ResumoCard descricao={edificio.tipologia} />
         </div>
         <div className="edificio-crud-anomalia-container">

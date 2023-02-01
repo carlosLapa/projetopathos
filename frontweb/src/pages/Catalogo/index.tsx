@@ -99,7 +99,7 @@ Aplicamos uma renderização condicional ternária para renderizar a página de 
 
       <div className="row">
         <Pagination
-          pageCount={page ? page.totalElements : 0}
+          pageCount={page ? page.totalPages : 0}
           range={3}
           onChange={getEdificios}
         />

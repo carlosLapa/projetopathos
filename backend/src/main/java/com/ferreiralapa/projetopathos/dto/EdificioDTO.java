@@ -18,7 +18,7 @@ public class EdificioDTO implements Serializable {
 	private Long id;
 	private String localizacao;
 	private String tipologia;
-	private String nome;
+	private String name;
 	private String utilizacao;
 	private String arquitetura;
 	private Integer piso;
@@ -35,12 +35,12 @@ public class EdificioDTO implements Serializable {
 	public EdificioDTO() {
 	}
 
-	public EdificioDTO(Long id, String localizacao, String tipologia, String nome, String utilizacao,
+	public EdificioDTO(Long id, String localizacao, String tipologia, String name, String utilizacao,
 			String arquitetura, Integer piso, String fracao, String imgUrl, Instant date, Instant createdAt) {
 		this.id = id;
 		this.localizacao = localizacao;
 		this.tipologia = tipologia;
-		this.nome = nome;
+		this.name = name;
 		this.utilizacao = utilizacao;
 		this.arquitetura = arquitetura;
 		this.piso = piso;
@@ -54,7 +54,7 @@ public class EdificioDTO implements Serializable {
 		this.id = entity.getId();
 		this.localizacao = entity.getLocalizacao();
 		this.tipologia = entity.getTipologia();
-		this.nome = entity.getNome();
+		this.name = entity.getName();
 		this.utilizacao = entity.getUtilizacao();
 		this.arquitetura = entity.getArquitetura();
 		this.piso = entity.getPiso();
@@ -93,12 +93,12 @@ public class EdificioDTO implements Serializable {
 		this.tipologia = tipologia;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUtilizacao() {
