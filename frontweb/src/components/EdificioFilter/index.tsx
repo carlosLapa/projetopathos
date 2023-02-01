@@ -1,70 +1,63 @@
-import { getValue } from '@testing-library/user-event/dist/utils';
 import { ReactComponent as SearchIcon } from 'assets/images/search-icon.svg';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import Select, { SingleValue } from 'react-select';
+import Select from 'react-select';
 import { Anomalia } from 'types/anomalia';
 import { requestBackend } from 'util/requests';
 
 import './styles.css';
 
-type EdificioFilterData = {
-  name: string;
+export type EdificioFilterData = {
+  nome: string;
   anomalia: Anomalia | null;
 };
 
-const EdificioFilter = () => {
-  const [selectAnomalias, setSelectAnomalias] = useState<Anomalia[]>([]);
+type Props = {
+  onSubmitFilter: (data: EdificioFilterData) => void;
+};
 
-  const { register, setValue, getValues, handleSubmit, control } =
+const ProductFilter = ({ onSubmitFilter }: Props) => {
+  const [selectCategories, setSelectCategories] = useState<Anomalia[]>([]);
+
+  const { register, handleSubmit, setValue, getValues, control } =
     useForm<EdificioFilterData>();
 
   const onSubmit = (formData: EdificioFilterData) => {
-    console.log('ENVIADO', formData);
+    onSubmitFilter(formData);
   };
 
-  /**
-   * Função, que dispara ao clicar no botão "Limpar filtro",
-   * para "settar" (setValue) o valor do nome como string vazia e as anomalias como nulas
-   */
   const handleFormClear = () => {
-    setValue('name', '');
+    setValue('nome', '');
     setValue('anomalia', null);
+  };
+
+  const handleChangeCategory = (value: Anomalia) => {
+    setValue('anomalia', value);
+
+    const obj: EdificioFilterData = {
+      nome: getValues('nome'),
+      anomalia: getValues('anomalia'),
+    };
+
+    onSubmitFilter(obj);
   };
 
   useEffect(() => {
     requestBackend({ url: '/anomalias' }).then((response) => {
-      setSelectAnomalias(response.data.content);
+      setSelectCategories(response.data.content);
     });
   }, []);
-
-  /**
-   * Ao limpar o filtro da Anomalia, vamos enviar tb o formulário.
-   * Para isso temos que passar o valor da mesma, sempre que mudar no select,
-   * assim passamos o argumento com o value da Anomalia. Desto modo, na função o tipo é Anomalia.
-   * Depois, fazemos um setValue para settar o value e ainda acrescentar os dados do formulário para ser enviado.
-   */
-  const handleChangeAnomalia = (value: Anomalia) => {
-    setValue('anomalia', value);
-
-    const obj: EdificioFilterData = {
-      name: getValues('name'),
-      anomalia: getValues('anomalia'),
-    };
-
-    console.log('ENVIADO', obj);
-  };
 
   return (
     <div className="base-card edificio-filter-container">
       <form onSubmit={handleSubmit(onSubmit)} className="edificio-filter-form">
         <div className="edificio-filter-name-container">
           <input
-            {...register('name')}
+            {...register('nome')}
             type="text"
-            className="form-control base-input"
-            placeholder="Designação do edifício"
-            name="name"
+            className="form-control"
+            placeholder="Nome do edifício"
+            name="nome"
           />
           <button className="edificio-filter-search-icon">
             <SearchIcon />
@@ -78,11 +71,11 @@ const EdificioFilter = () => {
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={selectAnomalias}
+                  options={selectCategories}
                   isClearable
                   placeholder="Anomalia"
                   classNamePrefix="edificio-filter-select"
-                  onChange={(value) => handleChangeAnomalia(value as Anomalia)}
+                  onChange={(value) => handleChangeCategory(value as Anomalia)}
                   getOptionLabel={(anomalia: Anomalia) => anomalia.tipologia}
                   getOptionValue={(anomalia: Anomalia) => String(anomalia.id)}
                 />
@@ -93,7 +86,7 @@ const EdificioFilter = () => {
             onClick={handleFormClear}
             className="btn btn-outline-secondary btn-edificio-filter-clear"
           >
-            LIMPAR <span className="btn-edificio-filter-word">FILTRO</span>
+            LIMPAR<span className="btn-edificio-filter-word"> FILTRO</span>
           </button>
         </div>
       </form>
@@ -101,4 +94,4 @@ const EdificioFilter = () => {
   );
 };
 
-export default EdificioFilter;
+export default ProductFilter;

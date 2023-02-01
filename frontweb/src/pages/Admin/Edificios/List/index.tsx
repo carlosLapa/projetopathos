@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
-import EdificioFilter from 'components/EdificioFilter';
 import Pagination from 'components/Pagination';
+import EdificioFilter, { EdificioFilterData } from 'components/EdificioFilter';
 import EdificioCrudCard from 'pages/Admin/Edificios/EdificioCrudCard';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -20,10 +20,14 @@ import './styles.css';
  * Depois criámos o useState que mantem o estado dos dados de todos os componentes q fazem algum controlo da listagem.
  * Quando disparar o evento onChange do Pagination,ao invés de chamar o Pagination, que por sua vez chamaria o getEdificio,
  * chama antes um numero referente à pagina ativa (q vem do estado original), através da função handlePageChange.
+ *
+ * o type ControlComponentsData serve para definir o tipo do nosso estado inicial do nosso componente que armazena os dados dos componentes
+ * de controlo, que são o da Pagination e ainda os do Filtro.
  */
 
 type ControlComponentsData = {
   activePage: number;
+  filterData: EdificioFilterData;
 };
 
 const List = () => {
@@ -32,10 +36,24 @@ const List = () => {
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
       activePage: 0,
+      filterData: { nome: '', anomalia: null },
     });
 
   const handlePageChange = (pageNumber: number) => {
-    setControlComponentsData({ activePage: pageNumber });
+    setControlComponentsData({
+      activePage: pageNumber,
+      filterData: controlComponentsData.filterData,
+    });
+  };
+
+  /**
+   * Ao efetuar um filtro, queremos voltar pra 1a pagina - então definimos o activePage pra 0
+   */
+  const handleSubmitFilter = (data: EdificioFilterData) => {
+    setControlComponentsData({
+      activePage: 0,
+      filterData: data,
+    });
   };
 
   /**
@@ -52,7 +70,9 @@ const List = () => {
       url: '/edificios',
       params: {
         page: controlComponentsData.activePage,
-        size: 2,
+        size: 3,
+        name: controlComponentsData.filterData.nome,
+        anomaliaId: controlComponentsData.filterData.anomalia?.id,
       },
     };
 
@@ -86,7 +106,7 @@ const List = () => {
             ADICIONAR / CRIAR
           </button>
         </Link>
-        <EdificioFilter />
+        <EdificioFilter onSubmitFilter={handleSubmitFilter} />
       </div>
       <div className="row">
         {page?.content.map((edificio) => (
@@ -96,7 +116,8 @@ const List = () => {
         ))}
       </div>
       <Pagination
-        pageCount={page ? page.totalElements : 0}
+        forcePage={page?.number}
+        pageCount={page ? page.totalPages : 0}
         range={3}
         onChange={handlePageChange}
       />

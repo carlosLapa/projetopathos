@@ -6,11 +6,9 @@ type Props = {
 
 const ResumoCard = ({ descricao }: Props) => {
   return (
-    <>
-      <div className="resumo-patologia-container">
-        <h5>{descricao}</h5>
-      </div>
-    </>
+    <div className="resumo-patologia-container">
+      <h5>{descricao}</h5>
+    </div>
   );
 };
 

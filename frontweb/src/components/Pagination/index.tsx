@@ -17,14 +17,16 @@ import './styles.css';
  * e depois a partir daí, podemos chamar, através do .selected, o numero da página que foi mudada já no componente List e Catálogo
  */
 type Props = {
+  forcePage?: number;
   pageCount: number;
   range: number;
   onChange?: (pageNumber: number) => void;
 };
 
-const Pagination = ({ pageCount, range, onChange }: Props) => {
+const Pagination = ({ forcePage, pageCount, range, onChange }: Props) => {
   return (
     <ReactPaginate
+      forcePage={forcePage}
       pageCount={pageCount}
       pageRangeDisplayed={range}
       marginPagesDisplayed={1}
@@ -38,12 +40,12 @@ const Pagination = ({ pageCount, range, onChange }: Props) => {
       onPageChange={(items) => (onChange ? onChange(items.selected) : {})}
       previousLabel={
         <div className="pagination-arrow-container">
-          <ArrowIcon />{' '}
+          <ArrowIcon />
         </div>
       }
       nextLabel={
         <div className="pagination-arrow-container">
-          <ArrowIcon />{' '}
+          <ArrowIcon />
         </div>
       }
     />

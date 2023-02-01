@@ -13,8 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -48,11 +46,14 @@ public class Anomalia implements Serializable {
 	 * 
 	 * a chave estrangeira da tabela onde estou - anomalia_id
 	 */
-	@ManyToMany
-	@JoinTable(name = "tb_anomalia_edificio", 
-	joinColumns = @JoinColumn(name = "anomalia_id"), 
-	inverseJoinColumns = @JoinColumn(name = "edificio_id"))
-	Set<Edificio> edificios = new HashSet<>();
+//	@ManyToMany
+//	@JoinTable(name = "tb_anomalia_edificio", 
+//	joinColumns = @JoinColumn(name = "anomalia_id"), 
+//	inverseJoinColumns = @JoinColumn(name = "edificio_id"))
+//	Set<Edificio> edificios = new HashSet<>();
+	
+	@ManyToMany(mappedBy = "anomalias")
+    private Set<Edificio> edificios = new HashSet<>();
 
 	/* Para aceder às causas associadas a cada anomalia */
 	@ManyToMany(mappedBy = "anomalias")
@@ -121,6 +122,7 @@ public class Anomalia implements Serializable {
 		this.descricao = descricao;
 	}
 
+	
 	public Set<Edificio> getEdificios() {
 		return edificios;
 	}
