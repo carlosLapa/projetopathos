@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { Anomalia } from 'types/anomalia';
 import { Edificio } from 'types/edificio';
 import { requestBackend } from 'util/requests';
+import { toast } from 'react-toastify';
 
 import './styles.css';
 
@@ -89,8 +90,13 @@ const Form = () => {
       withCredentials: true,
     };
 
-    requestBackend(config).then(() => {
+    requestBackend(config)
+    .then(() => {
+      toast.info('Edifício registado com sucesso!')
       history.push('/admin/edificios');
+    })
+    .catch(() => {
+      toast.error('Erro ao registar Edifício')
     });
   };
 
@@ -116,7 +122,7 @@ const Form = () => {
                     errors.name ? 'is-invalid' : ''
                   }`}
                   placeholder="Nome/designação do edifício"
-                  name="nome"
+                  name="name"
                 />
                 <div className="invalid-feedback d-block">
                   {errors.name?.message}

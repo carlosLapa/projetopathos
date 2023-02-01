@@ -12,6 +12,12 @@ export type EdificioFilterData = {
   anomalia: Anomalia | null;
 };
 
+/**
+ * Agora o componente EdificioFilter, vai ter um evento (onSubmitFilter) onde o componente List pode inscrever uma função
+ * (para executar no seu código),
+ * quando este evento ocorrer aqui. Para tal, usamos este type Props que contém um evento/função que recebe como argumento,
+ * um data do tipo EdificioFilterData.
+ */
 type Props = {
   onSubmitFilter: (data: EdificioFilterData) => void;
 };
@@ -26,11 +32,21 @@ const ProductFilter = ({ onSubmitFilter }: Props) => {
     onSubmitFilter(formData);
   };
 
+  /**
+   * Função, que dispara ao clicar no botão "Limpar filtro",
+   * para "settar" (setValue) o valor do nome como string vazia e as anomalias como nulas
+   */
   const handleFormClear = () => {
     setValue('name', '');
     setValue('anomalia', null);
   };
 
+   /**
+   * Ao limpar o filtro da Anomalia, vamos enviar tb o formulário.
+   * Para isso temos que passar o valor da mesma, sempre que mudar no select,
+   * assim passamos o argumento com o value da Anomalia. Desto modo, na função o tipo é Anomalia.
+   * Depois, fazemos um setValue para settar o value e ainda acrescentar os dados do formulário para ser enviado.
+   */
   const handleChangeCategory = (value: Anomalia) => {
     setValue('anomalia', value);
 
