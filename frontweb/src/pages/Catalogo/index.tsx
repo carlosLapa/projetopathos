@@ -88,7 +88,7 @@ Aplicamos uma renderização condicional ternária para renderizar a página de 
           page?.content.map((edificio) => {
             return (
               <div className="col-sm-6 col-lg-4 col-xl-6" key={edificio.id}>
-                <Link to="edificios/1">
+                <Link to={`/edificios/${edificio.id}`}>
                   <EdificioCard edificio={edificio} />
                 </Link>
               </div>

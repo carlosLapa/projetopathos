@@ -46,7 +46,7 @@ const EdificioDetails = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${BASE_URL}/edificios/${edificioId}`)
+      .get(`${BASE_URL}/edificios/${edificioId}`) //.get(`${BASE_URL}/products/${productId}`)
       .then((response) => {
         setEdificio(response.data);
       })
