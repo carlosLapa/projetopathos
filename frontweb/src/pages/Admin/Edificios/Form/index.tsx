@@ -16,6 +16,27 @@ type UrlParams = {
 };
 
 const Form = () => {
+  const [filebase64, setFileBase64] = useState<string>('');
+
+  function formSubmit(e: any) {
+    e.preventDefault();
+    console.log({ filebase64 });
+    alert('Submit the form using\n the filebase64 like any other field');
+  }
+
+  function convertFile(files: FileList | null) {
+    if (files) {
+      const fileRef = files[0] || '';
+      const fileType: string = fileRef.type || '';
+      console.log('This file upload is of type:', fileType);
+      const reader = new FileReader();
+      reader.readAsBinaryString(fileRef);
+      reader.onload = (ev: any) => {
+        // convert it to base64
+        setFileBase64(`data:${fileType};base64,${btoa(ev.target.result)}`);
+      };
+    }
+  }
 
   /**
    * O tipo customizado, Edificio, e os seus atributos, é o que controla este formulário, que neste caso servirá para POST
@@ -110,7 +131,7 @@ const Form = () => {
       <div className="base-card edificio-crud-form-card">
         <h1 className="edificio-crud-form-title">Dados do Edificio</h1>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit, formSubmit)}>
           <div className="row edificio-crud-inputs-container">
             <div className="col-lg-6 edificio-crud-inputs-left-container">
               <div className="margin-bottom-30">
@@ -231,6 +252,42 @@ const Form = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div>
+            <input type="file" onChange={(e) => convertFile(e.target.files)} />
+            {filebase64 && (
+              <>
+                {/* if it's an image */}
+                {filebase64.indexOf('image/') > -1 && (
+                  <img src={filebase64} width={400} alt="" />
+                )}
+                {/* if it's an image */}
+
+                {/* if it's a video */}
+                {filebase64.indexOf('video/') > -1 && (
+                  <video controls>
+                    <source src={filebase64} />
+                  </video>
+                )}
+                {/* if it's a video */}
+
+                {/* if it's a audio (music, sound) */}
+                {filebase64.indexOf('audio/') > -1 && (
+                  <audio controls>
+                    <source src={filebase64} />
+                  </audio>
+                )}
+                {/* if it's a audio (music, sound) */}
+
+                {/* if it's a PDF */}
+                {filebase64.indexOf('application/pdf') > -1 && (
+                  <embed src={filebase64} width="800px" height="2100px" />
+                )}
+                {/* if it's a PDF */}
+                <button> Submit and check the console</button>
+              </>
+            )}
           </div>
 
           <div className="edificio-crud-buttons-container">
