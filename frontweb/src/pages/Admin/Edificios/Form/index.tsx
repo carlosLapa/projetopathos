@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import Select from 'react-select';
@@ -16,6 +16,7 @@ type UrlParams = {
 };
 
 const Form = () => {
+
   /**
    * O tipo customizado, Edificio, e os seus atributos, é o que controla este formulário, que neste caso servirá para POST
    */
@@ -91,13 +92,13 @@ const Form = () => {
     };
 
     requestBackend(config)
-    .then(() => {
-      toast.info('Edifício registado com sucesso!')
-      history.push('/admin/edificios');
-    })
-    .catch(() => {
-      toast.error('Erro ao registar Edifício')
-    });
+      .then(() => {
+        toast.info('Edifício registado com sucesso!');
+        history.push('/admin/edificios');
+      })
+      .catch(() => {
+        toast.error('Erro ao registar Edifício');
+      });
   };
 
   const handleCancel = () => {

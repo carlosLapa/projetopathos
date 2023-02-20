@@ -41,8 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/*
 	 * Aqui temos de declarar este método explicitamente, para que o
-	 * AuthenticationManager seja também um componente disponivel ao sistema Então
-	 * já estamos a fazê-lo desde logo com a anotação Bean (tivemos que fazer o
+	 * AuthenticationManager seja também um componente disponivel ao sistema. 
+	 * Então já estamos a fazê-lo desde logo com a anotação Bean (tivemos que fazer o
 	 * Override para fazer isso)
 	 */
 	@Override
