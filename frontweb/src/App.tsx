@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const App = () => {
   /**Prover o Contexto Global - através de um useState - e com os dados que definimos no AuthContext
-   * Depois no return, provemos este estado eposteriomente podemos utilizar em toda a aplicação, 
+   * Depois no return, provemos este estado e posteriomente podemos utilizar em toda a aplicação, 
    * (como podemos ver na Navbar)
    */
   const [authContextData, setAuthContextData] = useState<AuthContextData>({
