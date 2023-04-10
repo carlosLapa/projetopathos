@@ -1,5 +1,3 @@
-import './styles.css';
-
 import ResumoCard from 'components/ResumoCard';
 import { Edificio } from 'types/edificio';
 import AnomaliaBadge from '../AnomaliaBadge';
@@ -7,12 +5,14 @@ import { Link } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 
+import './styles.css';
+
 /**
- * No Props acrescentámos mais uma Prop, que consiste no evento onDelete, que consiste numa função.
+ * No Props acrescentámos mais uma prop, que consiste no evento onDelete, que consiste numa função.
  * Depois, estando assim disponível, podemos chamá-la na função onde for pertinente, neste caso será no 
  * pedido ao backend, requestBackend(), para que, sempre que seja apagado um Edificio, 
  * o componente List "saiba" que o evento ocorreu, pois está a ser !observado! (uma vez que a função está inscrita nesse mesmo componente) 
- * e então atualiza e renderiza o novo estado da lista, aquando a função getEdificios seja chamada desde o BE.
+ * e então atualiza e renderiza o novo estado da lista, aquando a função getEdificios é chamada ao BE.
  */
 type Props = {
   edificio: Edificio;

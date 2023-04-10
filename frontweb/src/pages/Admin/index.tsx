@@ -5,6 +5,7 @@ import PrivateRoute from 'components/PrivateRoute';
 import Edificios from './Edificios';
 
 import './styles.css';
+import Anomalias from './Anomalias';
 
 const Admin = () => {
   return (
@@ -16,7 +17,7 @@ const Admin = () => {
             <Edificios />
           </PrivateRoute>
           <PrivateRoute path="/admin/anomalias">
-            <h1>Anomalia CRUD</h1>
+            <Anomalias />
           </PrivateRoute>
           <PrivateRoute path="/admin/users" roles={['ROLE_ADMIN']}>
             <Users />

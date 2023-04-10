@@ -109,6 +109,7 @@ public class AnomaliaService {
 		entity.setTipologia(dto.getTipologia());
 		entity.setDescricao(dto.getDescricao());
 		entity.setDate(dto.getDate());
+		entity.setImg(dto.getImg());
 		/*
 		 * Para garantir que compiamos somente as edificios que vêm no dto, efetuamos um
 		 * clear, para limpar os edificios que podem estar na entidade Assim, associamos
