@@ -55,6 +55,12 @@ const Form = () => {
    */
   const [selectAnomalias, setSelectAnomalias] = useState<Anomalia[]>([]);
 
+  useEffect(() => {
+    requestBackend({ url: '/anomalias' }).then((response) => {
+      setSelectAnomalias(response.data.content);
+    });
+  }, []);
+
   /**
    * o setValue permite definir o(s) valor(es) de algum(/ns) atributo(s)
    */
@@ -65,12 +71,6 @@ const Form = () => {
     setValue,
     control,
   } = useForm<Edificio>();
-
-  useEffect(() => {
-    requestBackend({ url: '/anomalias' }).then((response) => {
-      setSelectAnomalias(response.data.content);
-    });
-  }, []);
 
   /**
    * Para editar e trazer os atributos respectivos e preenchidos, utilizamos este useEffect,

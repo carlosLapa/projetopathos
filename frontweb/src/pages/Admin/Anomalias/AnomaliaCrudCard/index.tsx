@@ -32,26 +32,26 @@ const AnomaliaCrudCard = ({ anomalia, onDelete }: Props) => {
   };
 
   return (
-    <div className="base-card edificio-crud-card">
-      <div className="edificio-crud-card-top-container">
+    <div className="base-card anomalia-crud-card">
+      <div className="anomalia-crud-card-top-container">
         <img src={anomalia.img} alt="Imagem" />
       </div>
-      <div className="edificio-crud-card-description">
-        <div className="edificio-crud-card-bottom-container">
+      <div className="anomalia-crud-card-description">
+        <div className="anomalia-crud-card-bottom-container">
           <h6>{anomalia.tipologia}</h6>
           <hr></hr>
           <ResumoCard descricao={anomalia.descricao} />
         </div>
       </div>
-      <div className="edificio-crud-card-buttons-container">
+      <div className="anomalia-crud-card-buttons-container">
         <button
           onClick={() => handleDelete(anomalia.id)}
-          className="btn btn-outline-danger edificio-crud-card-button edificio-crud-card-button-first"
+          className="btn btn-outline-danger anomalia-crud-card-button anomalia-crud-card-button-first"
         >
           EXCLUIR
         </button>
         <Link to={`/admin/anomalias/${anomalia.id}`}>
-          <button className="btn btn-outline-secondary edificio-crud-card-button">
+          <button className="btn btn-outline-secondary anomalia-crud-card-button">
             EDITAR
           </button>
         </Link>

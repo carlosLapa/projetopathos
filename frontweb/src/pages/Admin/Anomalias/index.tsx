@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import List from './List';
+import Form from './Form';
 
 const Anomalias = () => {
   return (
@@ -12,7 +13,7 @@ const Anomalias = () => {
       <List />
       </Route>
       <Route path="/admin/anomalias/:anomaliaId">
-        Formulário
+        <Form />
       </Route>
     </Switch>
   );
