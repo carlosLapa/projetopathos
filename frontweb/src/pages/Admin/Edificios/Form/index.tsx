@@ -150,7 +150,7 @@ const Form = () => {
                   {errors.name?.message}
                 </div>
               </div>
-
+              {/* Filtro das anomalias aquando a edição */}
               <div className="margin-bottom-30">
                 <Controller
                   name="anomalias"

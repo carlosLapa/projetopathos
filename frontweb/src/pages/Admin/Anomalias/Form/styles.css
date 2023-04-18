@@ -1,0 +1,74 @@
+.anomalia-crud-form-card {
+    padding: 20px;
+  }
+  
+  .anomalia-crud-form-title {
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: -0.015em;
+    color: #263238;
+    margin-bottom: 30px;
+  }
+  
+  .form-control {
+    background-color: #fff;
+  }
+  
+  .margin-bottom-30 {
+    margin-bottom: 30px;
+  }
+  
+  .anomalia-crud-inputs-container {
+    margin-bottom: 30px;
+  }
+  
+  .anomalia-crud-inputs-left-container {
+    margin-bottom: 30px;
+  }
+  
+  .anomalia-crud-buttons-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .anomalia-crud-button {
+    height: 50px;
+    border-radius: 10px;
+    width: 110px;
+    font-weight: bold;
+  }
+  
+  .anomalia-crud-select__control {
+    height: 50px;
+    border-radius: 10px !important;
+    font-size: 1.2em;
+    letter-spacing: -0.015em;
+    color: #263238;
+    height: 50px;
+  }
+  
+  .anomalia-crud-select__placeholder {
+    color: #9e9e9e !important;
+  }
+  
+  .anomalia-crud-select__indicator-separator {
+    display: none;
+  }
+  
+  @media (min-width: 576px) {
+    .anomalia-crud-buttons-container {
+      justify-content: flex-end;
+    }
+  
+    .anomalia-crud-button {
+      margin-left: 30px;
+      width: 200px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .anomalia-crud-inputs-left-container {
+      margin-bottom: 0;
+    }
+  }
+  

@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import List from './List';
-import Form from './Form';
+import Form from './Form/indexOriginal';
+import { AddAnomalia } from './Form/addAnomalia';
 
 const Anomalias = () => {
   return (

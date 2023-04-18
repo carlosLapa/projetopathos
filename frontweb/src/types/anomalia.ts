@@ -7,6 +7,6 @@ export type Anomalia = {
   date: string;
   tipologia: string;
   descricao: string;
-  img: string;
+  img?: string;
   // edificios: Edificio[];
 };
