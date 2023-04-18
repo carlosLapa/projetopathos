@@ -21,48 +21,58 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.ferreiralapa.projetopathos.dto.AnomaliaDTO;
 import com.ferreiralapa.projetopathos.services.AnomaliaService;
 
+import requestModels.AddAnomaliaRequest;
+
 @RestController
 @RequestMapping(value = "/anomalias")
 public class AnomaliaResource {
 
-	@Autowired
-	private AnomaliaService AnomaliaService;
+    @Autowired
+    private AnomaliaService AnomaliaService;
 
-	/*
-	 * @GetMapping public ResponseEntity<List<AnomaliaDTO>> findAll() {
-	 * List<AnomaliaDTO> list = AnomaliaService.findAll(); return
-	 * ResponseEntity.ok().body(list); }
-	 */
+    /*
+     * @GetMapping public ResponseEntity<List<AnomaliaDTO>> findAll() {
+     * List<AnomaliaDTO> list = AnomaliaService.findAll(); return
+     * ResponseEntity.ok().body(list); }
+     */
 
-	@GetMapping
-	public ResponseEntity<Page<AnomaliaDTO>> findAll(Pageable pageable) {			
-		Page<AnomaliaDTO> list = AnomaliaService.findAllPaged(pageable);
-		return ResponseEntity.ok().body(list);
-	}
+    @GetMapping
+    public ResponseEntity<Page<AnomaliaDTO>> findAll(Pageable pageable) {
+        Page<AnomaliaDTO> list = AnomaliaService.findAllPaged(pageable);
+        return ResponseEntity.ok().body(list);
+    }
 
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<AnomaliaDTO> findById(@PathVariable Long id) {
-		AnomaliaDTO dto = AnomaliaService.findById(id);
-		return ResponseEntity.ok().body(dto);
-	}
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<AnomaliaDTO> findById(@PathVariable Long id) {
+        AnomaliaDTO dto = AnomaliaService.findById(id);
+        return ResponseEntity.ok().body(dto);
+    }
 
-	@PostMapping
-	public ResponseEntity<AnomaliaDTO> insert(@Valid @RequestBody AnomaliaDTO dto) {
-		dto = AnomaliaService.insert(dto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dto);
-	}
+//    @PostMapping
+//    public ResponseEntity<AnomaliaDTO> insert(@Valid @RequestBody AnomaliaDTO dto) {
+//        dto = AnomaliaService.insert(dto);
+//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+//        return ResponseEntity.created(uri).body(dto);
+//    }
 
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<AnomaliaDTO> update(@Valid @PathVariable Long id, @RequestBody AnomaliaDTO dto) {
-		dto = AnomaliaService.update(id, dto);
-		return ResponseEntity.ok().body(dto);
-	}
+    @PostMapping
+    public ResponseEntity<AddAnomaliaRequest> insert(@Valid @RequestBody AddAnomaliaRequest request) {
+        request = AnomaliaService.insert(request);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(request.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(request);
+    }
 
-	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) {
-		AnomaliaService.delete(id);
-		return ResponseEntity.noContent().build();
-	}
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<AnomaliaDTO> update(@Valid @PathVariable Long id, @RequestBody AnomaliaDTO dto) {
+        dto = AnomaliaService.update(id, dto);
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        AnomaliaService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
