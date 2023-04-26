@@ -34,7 +34,12 @@ const AnomaliaCrudCard = ({ anomalia, onDelete }: Props) => {
   return (
     <div className="base-card anomalia-crud-card">
       <div className="anomalia-crud-card-top-container">
-        <img src={anomalia.img} alt="Imagem" />
+      {anomalia.img && (
+          <img
+            //
+            alt="Imagem"
+          />
+        )}
       </div>
       <div className="anomalia-crud-card-description">
         <div className="anomalia-crud-card-bottom-container">

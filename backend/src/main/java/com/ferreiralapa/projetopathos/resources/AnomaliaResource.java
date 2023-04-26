@@ -1,5 +1,6 @@
 package com.ferreiralapa.projetopathos.resources;
 
+import java.io.IOException;
 import java.net.URI;
 
 import javax.validation.Valid;
@@ -10,12 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ferreiralapa.projetopathos.dto.AnomaliaDTO;
@@ -48,18 +52,12 @@ public class AnomaliaResource {
         return ResponseEntity.ok().body(dto);
     }
 
-//    @PostMapping
-//    public ResponseEntity<AnomaliaDTO> insert(@Valid @RequestBody AnomaliaDTO dto) {
-//        dto = AnomaliaService.insert(dto);
-//        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-//        return ResponseEntity.created(uri).body(dto);
-//    }
-
+    // Rever tudo e provavelmente temos que mudar de postGres para mySql devido à questão das imagens!
     @PostMapping
-    public ResponseEntity<AddAnomaliaRequest> insert(@Valid @RequestBody AddAnomaliaRequest request) {
-        request = AnomaliaService.insert(request);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(request.getId())
-                .toUri();
+    public ResponseEntity<AddAnomaliaRequest> insert(@RequestParam(value = "img", required = true) MultipartFile img, @Valid @ModelAttribute AddAnomaliaRequest request) throws IOException {
+        request.setImg(img); // set the MultipartFile object on the request object
+        request = AnomaliaService.insert(request); // perform the database insertion
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(request.getId()).toUri();
         return ResponseEntity.created(uri).body(request);
     }
 

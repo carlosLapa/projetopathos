@@ -4,6 +4,8 @@ import java.time.Instant;
 
 import javax.validation.constraints.PastOrPresent;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ferreiralapa.projetopathos.entities.Anomalia;
 
 public class AddAnomaliaRequest {
@@ -16,7 +18,7 @@ public class AddAnomaliaRequest {
     private Instant date;
     private String tipologia;
     private String descricao;
-    private String img;
+    private MultipartFile img;
 
     public AddAnomaliaRequest() {
 
@@ -24,7 +26,7 @@ public class AddAnomaliaRequest {
 
     public AddAnomaliaRequest(Long id, String consequente, String inconsequente, Instant date, String tipologia,
             String descricao,
-            String img) {
+            MultipartFile img) {
         super();
         this.id = id;
         this.consequente = consequente;
@@ -93,11 +95,11 @@ public class AddAnomaliaRequest {
         this.descricao = descricao;
     }
 
-    public String getImg() {
+    public MultipartFile getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(MultipartFile img) {
         this.img = img;
     }
 

@@ -13,9 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "tb_anomalia")
@@ -28,7 +31,8 @@ public class Anomalia implements Serializable {
     // Aqui talvez faça mais sentido ser um boolean - pois teve consequencia ou nao
     private String consequente;
     private String inconsequente;
-    private String img;
+    @Lob
+    private MultipartFile img;
 
     @Column(columnDefinition = "TEXT")
     private String tipologia;
@@ -67,7 +71,7 @@ public class Anomalia implements Serializable {
     }
 
     public Anomalia(String consequente, String inconsequente, Instant date, String tipologia, String descricao,
-            String img) {
+            MultipartFile img) {
         super();
         this.consequente = consequente;
         this.inconsequente = inconsequente;
@@ -125,11 +129,11 @@ public class Anomalia implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getImg() {
+    public MultipartFile getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(MultipartFile img) {
         this.img = img;
     }
 

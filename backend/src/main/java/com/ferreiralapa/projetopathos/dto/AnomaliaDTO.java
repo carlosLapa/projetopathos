@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.validation.constraints.PastOrPresent;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ferreiralapa.projetopathos.entities.Anomalia;
 import com.ferreiralapa.projetopathos.entities.Edificio;
 
@@ -22,7 +24,7 @@ public class AnomaliaDTO implements Serializable {
     private Instant date;
     private String tipologia;
     private String descricao;
-    private String img;
+    private MultipartFile img;
 
     private List<EdificioDTO> edificios = new ArrayList<>();
 
@@ -30,7 +32,7 @@ public class AnomaliaDTO implements Serializable {
     }
 
     public AnomaliaDTO(Long id, String consequente, String inconsequente, Instant date, String tipologia,
-            String descricao, String img) {
+            String descricao, MultipartFile img) {
         this.id = id;
         this.consequente = consequente;
         this.inconsequente = inconsequente;
@@ -113,11 +115,11 @@ public class AnomaliaDTO implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getImg() {
+    public MultipartFile getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(MultipartFile img) {
         this.img = img;
     }
 

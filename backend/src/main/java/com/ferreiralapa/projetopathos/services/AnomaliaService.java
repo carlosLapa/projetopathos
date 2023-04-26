@@ -106,12 +106,6 @@ public class AnomaliaService {
 
     }
 
-    /*
-     * Acho que o problema da imagem está aqui, pois ele espera que chegue uma lista
-     * com os edificios
-     * podemos criar outro método para lidar com o request de inserir/editar uma
-     * anomalia
-     */
     private void copyDtoToEntity(AnomaliaDTO dto, Anomalia entity) {
         entity.setConsequente(dto.getConsequente());
         entity.setInconsequente(dto.getInconsequente());
@@ -148,5 +142,5 @@ public class AnomaliaService {
         entity.setDate(addAnomaliaRequest.getDate());
         entity.setImg(addAnomaliaRequest.getImg());
     }
-
+    
 }
