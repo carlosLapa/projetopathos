@@ -22,10 +22,10 @@ INSERT INTO tb_edificio (localizacao, tipologia, name, utilizacao, arquitetura, 
 INSERT INTO tb_edificio (localizacao, tipologia, name, utilizacao, arquitetura, piso, fracao, img_url, date, created_At) VALUES ('Aveiro', 'Loja', 'Prêt a Porter', 'Serviços', 'Moderna', 70, '2B', 'https://www.ferreiralapa.com/wp-content/uploads/2021/09/3-1-1024x768.jpg', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z', NOW());
 
 
-INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, img, date) VALUES ('Sim', 'Não', 'Endógena', 'Fissuração nas paredes, devido à falta de juntas de dilatação ou movimentação que absorva, a deformabilidade da estrutura.', '', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
-INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, img, date) VALUES ('Não', 'Sim', 'Exógena', 'Danos provocados por obras no edíficio vizinho.', '', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
-INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, img, date) VALUES ('Sim', 'Não', 'Funcional', 'Manutenção inadequada das telas, originou rasgos ao longo do comprimento da mesma.', '', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
-INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, img, date) VALUES ('Sim', 'Não', 'Natural', 'Chuvas de intensidade anormal, originaram o aluimento dos terrenos.', '', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
+INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, date) VALUES ('Sim', 'Não', 'Endógena', 'Fissuração nas paredes, devido à falta de juntas de dilatação ou movimentação que absorva, a deformabilidade da estrutura.', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
+INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, date) VALUES ('Não', 'Sim', 'Exógena', 'Danos provocados por obras no edíficio vizinho.', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
+INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, date) VALUES ('Sim', 'Não', 'Funcional', 'Manutenção inadequada das telas, originou rasgos ao longo do comprimento da mesma.', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
+INSERT INTO tb_anomalia (consequente, inconsequente, tipologia, descricao, date) VALUES ('Sim', 'Não', 'Natural', 'Chuvas de intensidade anormal, originaram o aluimento dos terrenos.', TIMESTAMP WITH TIME ZONE '2022-04-14T10:00:00Z');
 
 INSERT INTO tb_causa (tipologia, descricao) VALUES ('Estrutural', 'Fissura no pilar');
 INSERT INTO tb_causa (tipologia, descricao) VALUES ('Térmica', 'Falta de isolamento');
