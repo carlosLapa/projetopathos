@@ -11,6 +11,8 @@ import CardLoader from './CardLoader';
 import './styles.css';
 
 const Catalogo = () => {
+
+  
   /*
   useState para a paginação de edificios, que armazena a página q chega do Backend, e que depois vai preencher a tela e depois poder atualizá-la;
   A SpringPage <T> do tipo genérico (criada na pasta "vendor"), que terá uma lista [], que neste caso vai receber o tipo Edificio, permite "casar"
@@ -43,7 +45,7 @@ const Catalogo = () => {
       url: '/edificios',
       params: {
         page: pageNumber,
-        size: 12,
+        size: 6,
       },
     };
 

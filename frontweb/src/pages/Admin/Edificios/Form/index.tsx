@@ -258,34 +258,29 @@ const Form = () => {
             <input type="file" onChange={(e) => convertFile(e.target.files)} />
             {filebase64 && (
               <>
-                {/* if it's an image */}
+                {/* image */}
                 {filebase64.indexOf('image/') > -1 && (
                   <img src={filebase64} width={400} alt="" />
                 )}
-                {/* if it's an image */}
 
-                {/* if it's a video */}
+                {/* video */}
                 {filebase64.indexOf('video/') > -1 && (
                   <video controls>
                     <source src={filebase64} />
                   </video>
                 )}
-                {/* if it's a video */}
 
-                {/* if it's a audio (music, sound) */}
+                {/* audio */}
                 {filebase64.indexOf('audio/') > -1 && (
                   <audio controls>
                     <source src={filebase64} />
                   </audio>
                 )}
-                {/* if it's a audio (music, sound) */}
 
-                {/* if it's a PDF */}
+                {/* PDF */}
                 {filebase64.indexOf('application/pdf') > -1 && (
                   <embed src={filebase64} width="800px" height="2100px" />
                 )}
-                {/* if it's a PDF */}
-                <button> Submit and check the console</button>
               </>
             )}
           </div>
