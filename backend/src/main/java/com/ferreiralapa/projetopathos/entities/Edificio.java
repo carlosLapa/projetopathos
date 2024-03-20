@@ -47,7 +47,8 @@ public class Edificio implements Serializable {
 
     /* Para aceder às anomalias associadas a cada edificio */
     @ManyToMany
-    @JoinTable(name = "tb_edificio_anomalia", joinColumns = @JoinColumn(name = "edificio_id"), inverseJoinColumns = @JoinColumn(name = "anomalia_id"))
+    @JoinTable(name = "tb_edificio_anomalia", joinColumns = @JoinColumn(name = "edificio_id"), 
+    inverseJoinColumns = @JoinColumn(name = "anomalia_id"))
     Set<Anomalia> anomalias = new HashSet<>();
 
     public Edificio() {

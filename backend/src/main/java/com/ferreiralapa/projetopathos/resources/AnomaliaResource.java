@@ -54,7 +54,7 @@ public class AnomaliaResource {
 
     // Rever tudo e provavelmente temos que mudar de postGres para mySql devido à questão das imagens!
     @PostMapping
-    public ResponseEntity<AddAnomaliaRequest> insert(@RequestParam(value = "img", required = true) MultipartFile img, @Valid @ModelAttribute AddAnomaliaRequest request) throws IOException {
+    public ResponseEntity<AddAnomaliaRequest> insert(@RequestParam("img") MultipartFile img, @Valid @ModelAttribute AddAnomaliaRequest request) throws IOException {
         request.setImg(img); // set the MultipartFile object on the request object
         request = AnomaliaService.insert(request); // perform the database insertion
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(request.getId()).toUri();
