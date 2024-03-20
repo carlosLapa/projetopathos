@@ -31,8 +31,6 @@ public class Anomalia implements Serializable {
     // Aqui talvez faça mais sentido ser um boolean - pois teve consequencia ou nao
     private String consequente;
     private String inconsequente;
-    @Lob
-    private MultipartFile img;
 
     @Column(columnDefinition = "TEXT")
     private String tipologia;
@@ -70,15 +68,13 @@ public class Anomalia implements Serializable {
     public Anomalia() {
     }
 
-    public Anomalia(String consequente, String inconsequente, Instant date, String tipologia, String descricao,
-            MultipartFile img) {
+    public Anomalia(String consequente, String inconsequente, Instant date, String tipologia, String descricao) {
         super();
         this.consequente = consequente;
         this.inconsequente = inconsequente;
         this.date = date;
         this.tipologia = tipologia;
         this.descricao = descricao;
-        this.img = img;
     }
 
     public Long getId() {
@@ -127,14 +123,6 @@ public class Anomalia implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public MultipartFile getImg() {
-        return img;
-    }
-
-    public void setImg(MultipartFile img) {
-        this.img = img;
     }
 
     public Set<Edificio> getEdificios() {

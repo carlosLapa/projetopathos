@@ -18,15 +18,13 @@ public class AddAnomaliaRequest {
     private Instant date;
     private String tipologia;
     private String descricao;
-    private MultipartFile img;
 
     public AddAnomaliaRequest() {
 
     }
 
     public AddAnomaliaRequest(Long id, String consequente, String inconsequente, Instant date, String tipologia,
-            String descricao,
-            MultipartFile img) {
+            String descricao) {
         super();
         this.id = id;
         this.consequente = consequente;
@@ -34,7 +32,6 @@ public class AddAnomaliaRequest {
         this.date = date;
         this.tipologia = tipologia;
         this.descricao = descricao;
-        this.img = img;
     }
 
     public AddAnomaliaRequest(Anomalia entity) {
@@ -44,7 +41,6 @@ public class AddAnomaliaRequest {
         this.date = entity.getDate();
         this.tipologia = entity.getTipologia();
         this.descricao = entity.getDescricao();
-        this.img = entity.getImg();
     }
 
     public Long getId() {
@@ -93,14 +89,6 @@ public class AddAnomaliaRequest {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public MultipartFile getImg() {
-        return img;
-    }
-
-    public void setImg(MultipartFile img) {
-        this.img = img;
     }
 
 }

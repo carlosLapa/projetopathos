@@ -24,7 +24,6 @@ public class AnomaliaDTO implements Serializable {
     private Instant date;
     private String tipologia;
     private String descricao;
-    private MultipartFile img;
 
     private List<EdificioDTO> edificios = new ArrayList<>();
 
@@ -32,14 +31,13 @@ public class AnomaliaDTO implements Serializable {
     }
 
     public AnomaliaDTO(Long id, String consequente, String inconsequente, Instant date, String tipologia,
-            String descricao, MultipartFile img) {
+            String descricao) {
         this.id = id;
         this.consequente = consequente;
         this.inconsequente = inconsequente;
         this.date = date;
         this.tipologia = tipologia;
         this.descricao = descricao;
-        this.img = img;
     }
 
     public AnomaliaDTO(Anomalia entity) {
@@ -49,7 +47,6 @@ public class AnomaliaDTO implements Serializable {
         this.date = entity.getDate();
         this.tipologia = entity.getTipologia();
         this.descricao = entity.getDescricao();
-        this.img = entity.getImg();
     }
 
     /*
@@ -113,14 +110,6 @@ public class AnomaliaDTO implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public MultipartFile getImg() {
-        return img;
-    }
-
-    public void setImg(MultipartFile img) {
-        this.img = img;
     }
 
     public List<EdificioDTO> getEdificios() {
