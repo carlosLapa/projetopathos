@@ -18,7 +18,6 @@ export const AddAnomalia = () => {
   const [date, setDate] = useState(0);
   const [tipologia, setTipologia] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [selectedImage, setSelectedImage] = useState<any>(null);
 
   const history = useHistory();
 
@@ -38,23 +37,6 @@ export const AddAnomalia = () => {
     history.push('/admin/anomalias');
   };
 
-  async function base64ConversionForImages(e: any) {
-    if (e.target.files[0]) {
-      getBase64(e.target.files[0]);
-    }
-  }
-
-  function getBase64(file: any) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      setSelectedImage(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log('Erro!', error);
-    };
-  }
-
   const { anomaliaId } = useParams<urlParams>();
   const isEditing = anomaliaId !== 'create';
 
@@ -64,7 +46,6 @@ export const AddAnomalia = () => {
         const anomalia = response.data as AddAnomaliaRequest;
         setValue('tipologia', anomalia.tipologia);
         setValue('descricao', anomalia.descricao);
-        setValue('img', anomalia.img);
       });
     }
   }, [anomaliaId, isEditing, setValue]);
@@ -74,11 +55,10 @@ export const AddAnomalia = () => {
     inconsequente,
     date,
     tipologia,
-    descricao,
-    selectedImage
+    descricao
   );
 
-  addNovaAnomalia: JSON.stringify(novaAnomalia);
+  //addNovaAnomalia: JSON.stringify(novaAnomalia);
 
   const onSubmit = (formData: AddAnomaliaRequest) => {
     const config: AxiosRequestConfig = {
@@ -137,22 +117,7 @@ export const AddAnomalia = () => {
                 <div className="invalid-feedback d-block">
                   {errors.consequente?.message}
                 </div>
-              </div>
-              <div className="margin-bottom-30">
-                <input
-                  {...register('img')}
-                  type="file"
-                  onChange={(e) => base64ConversionForImages(e)}
-                  className={`form-control base-input ${
-                    errors.img ? 'is-invalid' : ''
-                  }`}
-                  placeholder="Imagem da anomalia"
-                  name="img"
-                />
-                <div className="invalid-feedback d-block">
-                  {errors.img?.message}
-                </div>
-              </div>
+              </div>      
             </div>
             <div className="col-lg-6">
               <div>

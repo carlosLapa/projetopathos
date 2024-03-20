@@ -22,23 +22,20 @@ const Form = () => {
 
   const history = useHistory();
 
-  const [image, setImage] = useState<any>(null);
-
-  const [formData, setFormData] = useState<Anomalia>({
+  /*const [formData, setFormData] = useState<Anomalia>({
     id: 0,
     tipologia: '',
     descricao: '',
     consequente: '',
     inconsequente: '',
     img: undefined,
-  });
+  });*/
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    control,
   } = useForm<Anomalia>();
 
   useEffect(() => {
@@ -47,7 +44,6 @@ const Form = () => {
         const anomalia = response.data as Anomalia;
         setValue('tipologia', anomalia.tipologia);
         setValue('descricao', anomalia.descricao);
-        setValue('img', anomalia.img);
       });
     }
   }, [anomaliaId, isEditing, setValue]);
@@ -84,13 +80,6 @@ const Form = () => {
 
   const handleCancel = () => {
     history.push('/admin/anomalias');
-  };
-
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImage(file);
-    }
   };
 
   return (
@@ -133,10 +122,6 @@ const Form = () => {
                 <div className="invalid-feedback d-block">
                   {errors.consequente?.message}
                 </div>
-              </div>
-
-              <div className="margin-bottom-30">
-                <input type="file" name="img" onChange={(e) => handleFile(e)} />
               </div>
             </div>
             <div className="col-lg-6">

@@ -4,7 +4,6 @@ class AddAnomaliaRequest {
   date: number;
   tipologia: string;
   descricao: string;
-  img?: string;
 
   constructor(
     consequente: string,
@@ -12,7 +11,7 @@ class AddAnomaliaRequest {
     date: number,
     tipologia: string,
     descricao: string,
-    img?: string
+
   ) {
     this.consequente = consequente;
     this.inconsequente = inconsequente;
